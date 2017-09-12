@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fefefe;
+    color: rgb(68, 66, 87);
+    font-family: Amiko,sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: none; /* 2 */
+}

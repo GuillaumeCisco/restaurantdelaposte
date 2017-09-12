@@ -1,0 +1,32 @@
+import {css} from 'emotion';
+import styled from 'react-emotion';
+
+export const H1 = styled('h1')`
+    position: relative;
+    &:after {
+        content: '';
+        left: -20px;
+        bottom: -25px;
+        position: absolute;
+        width: 100px;
+        height: 4px;
+        background-color: #435645;
+    }
+`;
+
+export const Accroche = styled('span')`
+    font-size: 70px;
+    left: -25px;
+    margin-right: -25px;
+    position: relative;
+`;
+
+export const inlineP = styled('p')`
+    display: inline;
+`;
+
+export const side = css`
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+`;
