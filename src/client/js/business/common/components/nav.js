@@ -49,22 +49,22 @@ class Nav extends React.Component {
             <Ul>
                 <li>
                     <Link to='/menu' className={this.link('MENU')}>
-                        Menu
+                        La carte
                     </Link>
                 </li>
                 <li>
                     <Link to='/products' className={this.link('PRODUCTS')}>
-                        Produits
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/contact' className={this.link('CONTACT')}>
-                        Contact
+                        Galerie
                     </Link>
                 </li>
                 <li>
                     <Link to='/events' className={this.link('EVENTS')}>
                         Evenements
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/contact' className={this.link('CONTACT')}>
+                        Informations pratiques
                     </Link>
                 </li>
             </Ul>

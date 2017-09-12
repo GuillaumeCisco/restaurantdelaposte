@@ -77,7 +77,6 @@ const Home = props =>
             {/*<img className={img} src={Poireaux} alt="Poireaux vinaigrette fait maison"/>*/}
             <img className={img} src={Paris} alt="Paris-Brest fait maison"/>
             <img className={img} src={Riz} alt="Riz au lait façon grand-mère fait maison"/>
-            <img className={img} src={Paris} alt="Paris-Brest fait maison"/>
             {/*<img className={img} src={Roti} alt="Rôti de Porc sauce poivre et ses pommes sauté, fait maison"/>*/}
             {/*<img className={img} src={Dinde} alt="Sauté de Dinde et sa sauce provençale faite maison"/>*/}
             <img className={img} src={Sirop} alt="Sirop"/>
