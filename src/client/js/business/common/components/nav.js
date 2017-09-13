@@ -1,6 +1,6 @@
 import React from 'react';
 import {css} from 'emotion';
-import styled from 'react-emotion'
+import styled from 'react-emotion';
 import Link from 'redux-first-router-link';
 import {connect} from 'react-redux';
 
@@ -20,18 +20,13 @@ const Ul = styled('ul')`
     }
 `;
 
-class Nav extends React.Component {
-    base = css`
+const base = css`
         text-decoration: none;
         color: #444257;
     `;
 
-    link = (route) => css`
-        composes: ${this.base};
-        color: ${this.props.location.type === route ? '#03070e' : '#444257'};
-    `;
-    h1 = css`
-        composes: ${this.base};
+const link = css`
+        composes: ${base};
         padding: 8px 0;
         font-size: 44px;
         font-weight: 200;
@@ -39,10 +34,16 @@ class Nav extends React.Component {
         border-width: 2px 0;
     `;
 
+class Nav extends React.Component {
+    link = (route) => css`
+        composes: ${base};
+        color: ${this.props.location.type === route ? '#03070e' : '#444257'};
+    `;
+
     render() {
         return <Container>
             <h1>
-                <Link to='/'  className={this.h1}>
+                <Link to='/' className={link}>
                     Restaurant de la Poste
                 </Link>
             </h1>

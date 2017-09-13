@@ -10,26 +10,15 @@ import theme from '../../../../common/theme';
 
 import Routes from '../../../../common/routes';
 
-class Root extends React.Component {
-    // Remove the server-side injected CSS.
-    componentDidMount() {
-        const jssStyles = document.getElementById('jss-server-side');
-        if (jssStyles && jssStyles.parentNode) {
-            jssStyles.parentNode.removeChild(jssStyles);
-        }
-    }
-
-    render() {
-        return (<Provider store={this.props.store}>
-            <MuiThemeProvider theme={theme}>
-                <div>
-                    <Routes />
-                    <DevTools />
-                </div>
-            </MuiThemeProvider>
-        </Provider>);
-    }
-}
+const Root = ({store}) =>
+    <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+            <div>
+                <Routes/>
+                <DevTools/>
+            </div>
+        </MuiThemeProvider>
+    </Provider>;
 
 Root.propTypes = {
     store: PropTypes.shape({}).isRequired,

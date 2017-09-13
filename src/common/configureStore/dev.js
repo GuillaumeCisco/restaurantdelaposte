@@ -1,4 +1,3 @@
-
 import {connectRoutes} from 'redux-first-router';
 import {applyMiddleware, compose} from 'redux';
 import {pick} from 'lodash';

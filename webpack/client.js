@@ -21,7 +21,6 @@ module.exports = {
             'react-hot-loader/patch',
         ] : []),
         path.resolve(__dirname, '../src/client/js/index.js'),
-        `${__dirname}/../src/client/css/index.scss`,
     ],
     module: {
         rules: rules(),

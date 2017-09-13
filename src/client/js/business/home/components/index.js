@@ -2,6 +2,7 @@ import React from 'react';
 import {css} from 'emotion';
 import styled from 'react-emotion';
 import Slider from 'react-slick';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 import {Accroche, inlineP, H1, side} from '../../common/components/presentation';
 
@@ -64,7 +65,10 @@ const settings = {
 
 const Home = props =>
     <Container>
-        <img className={img} src={Bg} alt="bg"/>
+        {typeof window !== 'undefined' && <ScrollAnimation animateIn="fadeIn" animateOnce>
+            <img className={img} src={Bg} alt="bg"/>
+        </ScrollAnimation>
+        }
         <div className={wrapper}>
             <div className={left}>
                 <Slider {...settings}>
