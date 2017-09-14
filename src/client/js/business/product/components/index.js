@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 import Slider from '../../common/components/slider';
 
-const requireContext = require.context('!!file-loader!../../../../img/products/', true, /^\.\/.*\.jpg$/);
+const requireContext = require.context('../../../../img/products/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
 
 const Container = styled('div')`

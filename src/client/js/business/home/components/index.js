@@ -4,9 +4,9 @@ import styled from 'react-emotion';
 import Slider from '../../common/components/slider';
 
 import {Accroche, inlineP, H1, side} from '../../common/components/presentation';
-import Bg from '!!file-loader!../../../../img/bg.jpg';
+import Bg from '../../../../img/bg.jpg';
 
-const requireContext = require.context('!!file-loader!../../../../img/home/', true, /^\.\/.*\.jpg$/);
+const requireContext = require.context('../../../../img/home/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
 
 const fade = keyframes`
@@ -74,7 +74,7 @@ class Home extends React.Component {
                     <Slider items={items} height={500}/>
                 </div>
                 <div className={right}>
-                    <H1>LE RESTAURANT DE LA POSTE <br/>« Chez Robert »</H1>
+                    <H1>Le Restaurant de la Poste <br/>« Chez Robert »</H1>
                     <Content>
                         <Accroche>U</Accroche>
                         <inlineP>ne table traditionnelle renommée à Boulogne-Billancourt.

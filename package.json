@@ -94,12 +94,12 @@
         }
     },
     "dependencies": {
-        "animate.css": "^3.5.2",
         "babel-runtime": "6.26.0",
         "date-fns": "1.28.5",
         "emotion": "^7.2.2",
         "ends-with": "1.0.1",
         "fastclick": "1.0.6",
+        "google-map-react": "^0.24.0",
         "history": "^4.7.2",
         "jss": "^8.1.0",
         "jss-preset-default": "^3.0.0",
@@ -112,6 +112,7 @@
         "react-addons-css-transition-group": "^15.6.0",
         "react-dom": "^15.6.1",
         "react-emotion": "^7.2.2",
+        "react-google-maps": "^8.0.0",
         "react-helmet": "^5.2.0",
         "react-jss": "^7.1.0",
         "react-redux": "^5.0.6",
@@ -129,7 +130,6 @@
         "redux-saga": "0.15.6",
         "redux-sagas-injector": "0.2.2",
         "reselect": "3.0.1",
-        "slick-carousel": "^1.7.1",
         "url": "0.11.0",
         "uuid": "3.1.0"
     },

@@ -3,7 +3,8 @@ import {css} from 'emotion';
 import Nav from './nav';
 
 const style = css`
-    margin: 20px auto;
+    margin: 0 auto;
+    height: 100%;
   `;
 
 const Base = ({children}) =>

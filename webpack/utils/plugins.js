@@ -40,7 +40,6 @@ export default env => [
             new webpack.optimize.AggressiveMergingPlugin(),
             new StatsPlugin('stats.json'),
         ] : [
-            new WriteFilePlugin(), // used so you can see what chunks are produced in dev
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
 
@@ -104,9 +103,6 @@ export default env => [
         threads: 4,
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    // new webpack.ProvidePlugin({
-    //     fetch: 'consts-loader?this=>global!exports-loader?global.fetch!isomorphic-fetch',
-    // }),
     new ExtractCssChunks({
         filename: '[name].css',
         allChunks: false,

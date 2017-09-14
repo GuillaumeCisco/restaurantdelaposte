@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 const Container = styled('div')`
     text-align: center;
-    margin-bottom: 30px;
+    padding-top: 60px;
 `;
 
 const Ul = styled('ul')`
@@ -25,8 +25,9 @@ const base = css`
         color: #444257;
     `;
 
-const link = css`
+const link = css`        
         composes: ${base};
+        font-family: 'ShadedLarch';
         padding: 8px 0;
         font-size: 44px;
         font-weight: 200;

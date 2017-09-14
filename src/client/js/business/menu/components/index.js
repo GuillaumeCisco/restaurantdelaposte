@@ -2,17 +2,36 @@ import React from 'react';
 import styled from 'react-emotion';
 import {css} from 'emotion';
 
-import {Accroche, inlineP, H1, side} from '../../common/components/presentation';
+import {H1, side} from '../../common/components/presentation';
 
-const Container = styled('div')`
+import slate from '../../../../img/slate.jpg';
+import bg from '../../../../img/home/main3.jpg';
+
+
+const Wrapper = styled('div')`
     margin: 30px auto 0;
-    width: 1000px;
+    height: 100%;
+    background-image: url("${bg}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+`;
+
+const Shade = styled('div')`
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+`;
+
+const Container = styled('div')`    
+    color: #fff;
+    padding: 15% 15% 0;
+    text-shadow: 3px 2px 3px #333;
 `;
 
 const Content = styled('div')`
-    margin-top: 50px;
-    font-size: 26px;
-    text-align: center;
+    font-size: 24px;
+    margin-top: 50px;    
+    text-align: center;    
 `;
 
 const close = css`
@@ -24,18 +43,23 @@ const close = css`
 const card = css`
     margin-top: 10px;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    background-color: #222;
+    border: 1px solid #999;
+    background-image: url("${slate}");
+    background-position: center center;
+    background-size: cover;
     color: #fff;
     padding: 10px;    
     text-align: center;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Ul = styled('ul')`
     margin: 10px 0 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px dashed #353675;
     & li {                
         margin: 0 50px; 
         display: inline;
@@ -43,32 +67,39 @@ const Ul = styled('ul')`
 `;
 
 const Menu = props =>
-    <Container>
-        <H1>Le concept</H1>
-        <Content>
-            <h3>Produits frais de saison variant tous les jours comprenant</h3>
-            <Ul>
-                <li>3 entrées</li>
-                <li>3 plats</li>
-                <li>un grand choix de desserts maison</li>
-            </Ul>
-            <div>
-                <div className={close}>
-                    <h4>Formules à 13,00€</h4>
-                    <div className={card}>
-                        entrée + plat<br/>OU<br/>plat + dessert
+    <Wrapper>
+        <Shade>
+            <Container>
+                <H1>Le Concept</H1>
+                <Content>
+                    <h3><i>Produits frais de saison variant tous les jours comprenant</i></h3>
+                    <Ul>
+                        <li>3 entrées</li>
+                        <li>3 plats</li>
+                        <li>un grand choix de desserts maison</li>
+                    </Ul>
+                    <div>
+                        <div className={close}>
+                            <h4>Formules à 13,00€</h4>
+                            <div className={card}>
+                                <div>
+                                    Entrée + Plat<br/><i>ou</i><br/>Plat + Dessert
+                                </div>
+                            </div>
+                        </div>
+                        <div className={close}>
+                            <h4>Menu à 16,10€</h4>
+                            <div className={card}>
+                                <div>
+                                    Entrée<br/>Plat<br/>Dessert<br/>Boisson
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className={close}>
-                    <h4>Menu à 16,10€</h4>
-                    <div className={card}>
-                        entrée<br/>plat<br/>dessert<br/>boisson
-                    </div>
-                </div>
-            </div>
-            <span>Plats à la carte à partir de 9,50€.</span>
-        </Content>
-
-    </Container>;
+                    <span>Plats à la carte à partir de 9,50€.</span>
+                </Content>
+            </Container>
+        </Shade>
+    </Wrapper>;
 
 export default Menu;

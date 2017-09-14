@@ -1,0 +1,39 @@
+By installing or using this font you agree to the Product Usage Agreement:
+http://www.aringtypeface.com/license/product-usage-agreement/
+
+-----------------------
+
+This font is for PERSONAL USE ONLY and requires a license for commercial use. 
+The font license can be purchased at: 
+http://www.aringtypeface.com/larch
+
+Please read "What license do I need?" for more info:
+http://www.aringtypeface.com/license
+
+-----------------------
+
+Larch is a clear and crisp high quality script typeface. 
+It consists of five weights: White, Bright, Shaded, Dark & Black.
+Each style is working great separately, but they 
+make the perfect combination together. 
+Larch is designed by Måns Grebäck in 2016.
+
+The font supports hundreds of languages. 
+It contains contextual and stylistic alternates, swashes and ligatures. 
+
+Write # after any lowercase letter to make swashes!
+
+You can also write % after the following letters to make left swashes:
+b d f h i j k l t
+
+Example: Black% Lar#ch
+
+(If it does not work, make sure your software supports ligatures, and 
+that the ligature function is activated.)
+
+-----------------------
+
+For further information, please read the FAQ:
+http://www.aringtypeface.com/faq
+
+

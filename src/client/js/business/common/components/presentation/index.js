@@ -3,6 +3,8 @@ import styled from 'react-emotion';
 
 export const H1 = styled('h1')`
     position: relative;
+    font-size: 32px;
+    font-family: 'ShadedLarch';
     &:after {
         content: '';
         left: -20px;
@@ -10,7 +12,7 @@ export const H1 = styled('h1')`
         position: absolute;
         width: 100px;
         height: 4px;
-        background-color: #435645;
+        background-color: #353675;
     }
 `;
 
