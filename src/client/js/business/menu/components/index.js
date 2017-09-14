@@ -36,24 +36,26 @@ const Content = styled('div')`
 
 const close = css`
     composes: ${side}; 
-    width: 300px;
+    width: 350px;
     margin: 1%;     
 `;
 
 const card = css`
     margin-top: 10px;
-    border-radius: 10px;
-    border: 1px solid #999;
+    border: 3px solid #333;
     background-image: url("${slate}");
     background-position: center center;
     background-size: cover;
     color: #fff;
     padding: 10px;    
     text-align: center;
-    height: 150px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Amontillados';
+    font-size: 80px;
+    text-shadow: 3px 1px 1px black;
 `;
 
 const Ul = styled('ul')`
