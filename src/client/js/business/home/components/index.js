@@ -32,7 +32,7 @@ const img = css`
 
 const animatedImg = css`
     composes: ${img};
-    animation: ${fade} 0.7s;
+    animation: ${fade} 0.3s;
 `;
 
 const hiddenImg = css`
@@ -58,22 +58,14 @@ const right = css`
 `;
 
 class Home extends React.Component {
-    state = {
-        imgLoaded: false,
-    };
-    onImgLoad = ({target: img}) => {
-        this.setState({imgLoaded: true});
-    };
-
     render() {
         return (<Container>
             <img
-                className={this.state.imgLoaded && typeof window !== 'undefined' ? animatedImg : hiddenImg}
+                className={typeof window !== 'undefined' ? animatedImg : hiddenImg}
                 src={Bg}
                 alt="bg"
-                onLoad={this.onImgLoad}
             />
-            {this.state.imgLoaded && <div className={wrapper}>
+            <div className={wrapper}>
                 <div className={left}>
                     <Slider items={items} height={500} />
                 </div>
@@ -97,7 +89,6 @@ class Home extends React.Component {
                     </Content>
                 </div>
             </div>
-            }
         </Container>);
     }
 }

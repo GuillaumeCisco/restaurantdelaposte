@@ -1,13 +1,10 @@
 #! /usr/bin/env node
 const shell = require('shelljs');
 
-// shell.exec("aws s3 --region eu-central-1 cp ./build/frontend s3://dreem-fronts/notebook/ --recursive");
-// shell.exec("aws cloudfront create-invalidation --cli-input-json '{\"DistributionId\":\"E3BTH1EYFN3UC7\",\"InvalidationBatch\":{\"Paths\":{\"Quantity\":1,\"Items\":[\"/notebook/*\"]},\"CallerReference\":\"'\"$(uuidgen)\"'\"}}'");
-
 const timestamp = new Date().getTime();
-const registry = 'guillaume';
+const registry = '984406419997.dkr.ecr.eu-central-1.amazonaws.com';
 const name = 'restaurantdelaposte';
 
 console.log(`Deploying ${registry}/${name}:${timestamp}`);
 
-shell.exec(`docker build -t ${registry}/${name}:latest . && docker push ${registry}/${name}:latest`);
+shell.exec(`docker build -t ${registry}/${name}:${timestamp} -t ${registry}/${name}:latest . && docker push ${registry}/${name}:latest`);
