@@ -8,7 +8,6 @@ export default env => [
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'happypack/loader?id=babel',
-        // use: 'babel-loader',
     }, {
         test: /\.jpe?g$|\.gif$|\.png$/,
         use: 'url-loader?limit=10000&name=[hash].[ext]',

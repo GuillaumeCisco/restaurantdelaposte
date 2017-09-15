@@ -15,7 +15,10 @@ import '../css/index.scss';
 /********************
  *  Server hydration
  ********************/
-hydrate(window.__EMOTION_IDS__);
+if (window.__EMOTION_IDS__) {
+    hydrate(window.__EMOTION_IDS__);
+}
+
 // Remove the server-side injected CSS.
 const jssStyles = document.getElementById('jss-server-side');
 if (jssStyles && jssStyles.parentNode) {

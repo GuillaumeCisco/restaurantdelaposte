@@ -5,7 +5,7 @@ import {Accroche, inlineP, H1} from '../../common/components/presentation';
 
 const Container = styled('div')`
     width: 800px;
-    margin: 0 auto;
+    margin: 30px auto 0;
 `;
 
 const Content = styled('div')`

@@ -14,8 +14,8 @@ const Ul = styled('ul')`
     margin-top: 30px;
     padding-top: 15px;
     & li {                
-        margin: 0 50px; 
-        display: inline;
+        margin: 0 5%; 
+        display: inline-block;
         font-size: 16px;
     }
 `;

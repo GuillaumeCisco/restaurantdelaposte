@@ -24,7 +24,7 @@ const Shade = styled('div')`
 
 const Container = styled('div')`    
     color: #fff;
-    padding: 15% 15% 0;
+    padding: 8% 15% 0;
     text-shadow: 3px 2px 3px #333;
 `;
 
