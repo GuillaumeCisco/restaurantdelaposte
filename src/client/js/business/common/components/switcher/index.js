@@ -1,7 +1,7 @@
 import React from 'react';
 import {css} from 'emotion';
 import styled from 'react-emotion';
-import {AnimatedTransitionGroup, AnimatedChild} from 'animated-transition-group';
+import { TransitionGroup, Transition } from 'transition-group'
 
 import HomeRoutes from '../../../home/routes';
 import MenuRoutes from '../../../menu/routes';
@@ -48,21 +48,20 @@ const Container = styled('div')`
 const Switcher = ({page}) =>
     <div className={style}>
         <Nav/>
-        <AnimatedTransitionGroup
+        <TransitionGroup
             component={'div'}
             className={group}
             prefix='fade'
-            debounce={300}
             duration={300}
             enterDelay={300}
             leaveDelay={0}
         >
-            <AnimatedChild key={page}>
+            <Transition key={page}>
                 <Container>
                     {getComponent(page)}
                 </Container>
-            </AnimatedChild>
-        </AnimatedTransitionGroup>;
+            </Transition>
+        </TransitionGroup>;
     </div>;
 
 
