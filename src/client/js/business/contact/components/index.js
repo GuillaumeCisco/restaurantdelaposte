@@ -116,13 +116,13 @@ const Contact = ({lat, lng, center, bootstrapURLKeys}) =>
         <div className={area}>
             <Phone>01 46 21 32 07</Phone>
             <Address>
-                `${"2 rue Rouget de L'isle"}`
+                {'2 rue Rouget de L\'isle'}
                 <br />
                 Boulogne-Billancourt, France
             </Address>
 
             <Hours>
-                <h3>`${"heures d'ouvertures:"}`</h3>
+                <h3>{'heures d\'ouvertures:'}</h3>
                 <Day>Lundi</Day>: 8h-22h<br />
                 <Day>Mardi</Day>: 8h-22h<br />
                 <Day>Mercredi</Day>: 8h-23h<br />

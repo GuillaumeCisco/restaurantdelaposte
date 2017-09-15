@@ -21,7 +21,7 @@ const Home = props =>
         <Content>
             <Accroche>D</Accroche>
             <inlineP>e nombreux evenements sont organises regulierement.</inlineP>
-            <p>`${"N'hesitez pas a vous renseigner au restaurant."}`</p>
+            <p>{'N\'hesitez pas a vous renseigner au restaurant.'}</p>
         </Content>
     </Container>);
 
