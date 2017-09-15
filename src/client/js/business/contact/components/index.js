@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import {css} from 'emotion';
 import GoogleMapReact from 'google-map-react';
@@ -46,7 +47,7 @@ const greatPlaceStyle = {
     width: MARKER_SIZE,
     height: MARKER_SIZE * 1.6,
     left: -MARKER_SIZE / 2,
-    top: -MARKER_SIZE / 2
+    top: -MARKER_SIZE / 2,
 };
 
 const area = css`
@@ -102,40 +103,52 @@ const m9 = css`
 const Marker = () => <img style={greatPlaceStyle} src={Pin} alt="Marker" />;
 
 const Contact = ({lat, lng, center, bootstrapURLKeys}) =>
-    <Container>
+    (<Container>
         <div className={map}>
             <GoogleMapReact
                 bootstrapURLKeys={bootstrapURLKeys}
                 defaultCenter={center}
                 defaultZoom={16}
             >
-                <Marker lat={lat} lng={lng}/>
+                <Marker lat={lat} lng={lng} />
             </GoogleMapReact>
         </div>
         <div className={area}>
             <Phone>01 46 21 32 07</Phone>
             <Address>
-                2 rue Rouget de L'isle
-                <br/>
+                `${"2 rue Rouget de L'isle"}`
+                <br />
                 Boulogne-Billancourt, France
             </Address>
 
             <Hours>
-                <h3>heures d'ouvertures:</h3>
-                <Day>Lundi</Day>: 8h-22h<br/>
-                <Day>Mardi</Day>: 8h-22h<br/>
-                <Day>Mercredi</Day>: 8h-23h<br/>
-                <Day>Jeudi</Day>: 8h-22h<br/>
-                <Day>Vendredi</Day>: 8-23h<br/>
-                <Day>Samedi</Day>: 7h-17h<br/>
-                <Day>Dimanche</Day>: Ferme<br/>
+                <h3>`${"heures d'ouvertures:"}`</h3>
+                <Day>Lundi</Day>: 8h-22h<br />
+                <Day>Mardi</Day>: 8h-22h<br />
+                <Day>Mercredi</Day>: 8h-23h<br />
+                <Day>Jeudi</Day>: 8h-22h<br />
+                <Day>Vendredi</Day>: 8-23h<br />
+                <Day>Samedi</Day>: 7h-17h<br />
+                <Day>Dimanche</Day>: Ferme<br />
             </Hours>
 
             <Transport>
-                Transports : <span className={b123}>123</span>, <span className={b126}>126</span>, <span className={b175}>175</span> et Metro ligne <span className={m9}>9</span><br/>Arrêt : Marcel Sembat
+                Transports : <span className={b123}>123</span>, <span className={b126}>126</span>, <span className={b175}>175</span> et Metro ligne <span className={m9}>9</span><br />Arrêt : Marcel Sembat
             </Transport>
         </div>
-    </Container>;
+    </Container>);
+
+Contact.propTypes = {
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+    center: PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+    }),
+    bootstrapURLKeys: PropTypes.shape({
+        language: PropTypes.string,
+    }),
+};
 
 Contact.defaultProps = {
     lat: 48.832449,
@@ -143,7 +156,7 @@ Contact.defaultProps = {
     center: {lat: 48.832449, lng: 2.241246},
     bootstrapURLKeys: {
         language: 'fr',
-    }
+    },
 };
 
 export default Contact;

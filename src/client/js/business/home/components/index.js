@@ -66,15 +66,19 @@ class Home extends React.Component {
     };
 
     render() {
-        return <Container>
-            <img className={this.state.imgLoaded && typeof window !== 'undefined' ? animatedImg : hiddenImg} src={Bg}
-                 alt="bg" onLoad={this.onImgLoad}/>
+        return (<Container>
+            <img
+                className={this.state.imgLoaded && typeof window !== 'undefined' ? animatedImg : hiddenImg}
+                src={Bg}
+                alt="bg"
+                onLoad={this.onImgLoad}
+            />
             {this.state.imgLoaded && <div className={wrapper}>
                 <div className={left}>
-                    <Slider items={items} height={500}/>
+                    <Slider items={items} height={500} />
                 </div>
                 <div className={right}>
-                    <H1>Le Restaurant de la Poste <br/>« Chez Robert »</H1>
+                    <H1>Le Restaurant de la Poste <br />« Chez Robert »</H1>
                     <Content>
                         <Accroche>U</Accroche>
                         <inlineP>ne table traditionnelle renommée à Boulogne-Billancourt.
@@ -94,7 +98,7 @@ class Home extends React.Component {
                 </div>
             </div>
             }
-        </Container>;
+        </Container>);
     }
 }
 

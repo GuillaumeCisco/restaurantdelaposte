@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import config from 'config';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
-import WriteFilePlugin from 'write-file-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HappyPack from 'happypack';
@@ -9,7 +8,6 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 import definePlugin from './definePlugin';
 import dll from './dll';
-
 
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV)),
     PRODUCTION = (['production'].includes(process.env.NODE_ENV));

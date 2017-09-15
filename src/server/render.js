@@ -28,7 +28,7 @@ const createApp = (App, store) =>
     (<Provider store={store}>
         <JssProvider registry={sheetsRegistry} jss={jss}>
             <MuiThemeProvider theme={theme}>
-                <App/>
+                <App />
             </MuiThemeProvider>
         </JssProvider>
     </Provider>);
@@ -68,7 +68,7 @@ export default ({clientStats}) => async (req, res, next) => {
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
-          <script>${`window.__EMOTION_IDS__ = new Array("${ids}")`}</script>
+          <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
           ${cssHash}          
           <script type='text/javascript' src='/reactVendors.js'></script>

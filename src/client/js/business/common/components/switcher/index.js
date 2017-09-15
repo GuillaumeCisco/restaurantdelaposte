@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {css} from 'emotion';
 import styled from 'react-emotion';
-import { TransitionGroup, Transition } from 'transition-group'
+import {TransitionGroup, Transition} from 'transition-group';
 
 import HomeRoutes from '../../../home/routes';
 import MenuRoutes from '../../../menu/routes';
@@ -12,18 +13,20 @@ import ContactRoutes from '../../../contact/routes';
 import './index.css';
 import Nav from '../nav';
 
-const getComponent = page => {
+const getComponent = (page) => {
     switch (page) {
     case 'HOME':
-        return <HomeRoutes/>;
+        return <HomeRoutes />;
     case 'MENU':
-        return <MenuRoutes/>;
+        return <MenuRoutes />;
     case 'PRODUCTS':
-        return <ProductRoutes/>;
+        return <ProductRoutes />;
     case 'EVENTS':
-        return <EventRoutes/>;
+        return <EventRoutes />;
     case 'CONTACT':
-        return <ContactRoutes/>;
+        return <ContactRoutes />;
+    default:
+        return <h1>Not Found</h1>;
     }
 };
 
@@ -46,12 +49,12 @@ const Container = styled('div')`
   `;
 
 const Switcher = ({page}) =>
-    <div className={style}>
-        <Nav/>
+    (<div className={style}>
+        <Nav />
         <TransitionGroup
             component={'div'}
             className={group}
-            prefix='fade'
+            prefix="fade"
             duration={300}
             enterDelay={300}
             leaveDelay={0}
@@ -62,7 +65,11 @@ const Switcher = ({page}) =>
                 </Container>
             </Transition>
         </TransitionGroup>;
-    </div>;
+    </div>);
 
+
+Switcher.propTypes = {
+    page: PropTypes.string.isRequired,
+};
 
 export default Switcher;

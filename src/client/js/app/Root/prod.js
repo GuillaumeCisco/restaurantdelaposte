@@ -1,5 +1,3 @@
-/* globals document */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
@@ -8,7 +6,7 @@ import {MuiThemeProvider} from 'material-ui/styles';
 import theme from '../../../../common/theme';
 import Routes from '../../../../common/routes';
 
-// For using browserHistory with amazon s3, we need our own domain name (for not impacting customer and record)
+// For using browserHistory with amazon s3, we need our own domain name
 // and a custom routerHistory
 // http://stackoverflow.com/questions/16267339/s3-static-website-hosting-route-all-paths-to-index-html
 /*
@@ -35,11 +33,11 @@ import Routes from '../../../../common/routes';
 // }
 
 const Root = ({store}) =>
-    <Provider store={store}>
+    (<Provider store={store}>
         <MuiThemeProvider theme={theme}>
-            <Routes/>
+            <Routes />
         </MuiThemeProvider>
-    </Provider>;
+    </Provider>);
 
 
 Root.propTypes = {

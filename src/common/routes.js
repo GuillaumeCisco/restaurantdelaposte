@@ -7,5 +7,5 @@ import routes from './routesMap';
 const mapStateToProps = ({location}, ownProps) => ({location, ...ownProps});
 
 export default connect(mapStateToProps)(({location}) =>
-    Object.keys(routes).includes(location.type) ? <Switcher page={location.type}/> : <h1>Not Found</h1>,
+    Object.keys(routes).includes(location.type) ? <Switcher page={location.type} /> : <h1>Not Found</h1>,
 );

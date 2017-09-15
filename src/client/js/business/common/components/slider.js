@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {pure} from 'recompose';
 import styled from 'react-emotion';
 import {css} from 'emotion';
@@ -23,31 +24,32 @@ const fadeOut = css`
     opacity: 0;
 `;
 
-const img = (className, src) =>  css`
+const img = (className, src, transitionSpeed) => css`
     composes: ${className};
     max-width: 100%;                                              
-    transition: opacity 0.7s;
+    transition: opacity ${transitionSpeed}s;
     background-image: url("${src}");
     background-size: cover;
     background-position: center center;
     height: 100%;
 `;
 
-class C extends React.Component {
+class Slider extends React.Component {
     state = {
         current: 0,
     };
 
     componentDidMount() {
-        const intervalId = setInterval(this.timer, this.props.speed);
         // store intervalId in the state so it can be accessed later:
-        this.setState({intervalId: intervalId});
+        this.onMount(intervalId => this.setState({intervalId}));
     }
 
     componentWillUnmount() {
         // use intervalId from the state to clear the interval
         clearInterval(this.state.intervalId);
     }
+
+    onMount = callback => callback(setInterval(this.timer, this.props.speed));
 
     timer = () => {
         // setState method is used to update the state
@@ -59,17 +61,24 @@ class C extends React.Component {
     render() {
         const {items, transitionSpeed, height} = this.props;
 
-        return <Ul transitionSpeed={transitionSpeed} height={height}>
+        return (<Ul height={height}>
             {items.map((o, i) =>
-                <li key={o}>
-                    <div className={img(this.state.current === i ? fadeIn : fadeOut, o)}/>
-                </li>,
+                (<li key={o}>
+                    <div className={img(this.state.current === i ? fadeIn : fadeOut, o, transitionSpeed)} />
+                </li>),
             )}
-        </Ul>;
+        </Ul>);
     }
 }
 
-C.defaultProps = {
+Slider.propTypes = {
+    speed: PropTypes.number,
+    items: PropTypes.arrayOf(PropTypes.string),
+    transitionSpeed: PropTypes.number,
+    height: PropTypes.number,
+};
+
+Slider.defaultProps = {
     speed: 3000,
     transitionSpeed: 0.7,
     items: [],
@@ -77,4 +86,4 @@ C.defaultProps = {
 };
 
 
-export default pure(C);
+export default pure(Slider);

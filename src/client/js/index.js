@@ -12,11 +12,11 @@ import history from './app/history';
 import configureStore from '../../common/configureStore';
 import '../css/index.scss';
 
-/********************
+/** ******************
  *  Server hydration
- ********************/
-if (window.__EMOTION_IDS__) {
-    hydrate(window.__EMOTION_IDS__);
+ ******************* */
+if (window.EMOTION_IDS) {
+    hydrate(window.EMOTION_IDS);
 }
 
 // Remove the server-side injected CSS.

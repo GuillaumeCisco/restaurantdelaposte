@@ -11,8 +11,8 @@ const Container = styled('div')`
 `;
 
 const Product = () =>
-    <Container>
-        <Slider items={items}/>
-    </Container>;
+    (<Container>
+        <Slider items={items} />
+    </Container>);
 
 export default Product;

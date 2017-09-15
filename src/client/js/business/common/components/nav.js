@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {css} from 'emotion';
 import styled from 'react-emotion';
 import Link from 'redux-first-router-link';
@@ -36,43 +37,49 @@ const link = css`
     `;
 
 class Nav extends React.Component {
-    link = (route) => css`
+    link = route => css`
         composes: ${base};
         color: ${this.props.location.type === route ? '#03070e' : '#444257'};
     `;
 
     render() {
-        return <Container>
+        return (<Container>
             <h1>
-                <Link to='/' className={link}>
+                <Link to="/" className={link}>
                     Restaurant de la Poste
                 </Link>
             </h1>
             <Ul>
                 <li>
-                    <Link to='/menu' className={this.link('MENU')}>
+                    <Link to="/menu" className={this.link('MENU')}>
                         La carte
                     </Link>
                 </li>
                 <li>
-                    <Link to='/products' className={this.link('PRODUCTS')}>
+                    <Link to="/products" className={this.link('PRODUCTS')}>
                         Galerie
                     </Link>
                 </li>
                 <li>
-                    <Link to='/events' className={this.link('EVENTS')}>
+                    <Link to="/events" className={this.link('EVENTS')}>
                         Evenements
                     </Link>
                 </li>
                 <li>
-                    <Link to='/contact' className={this.link('CONTACT')}>
+                    <Link to="/contact" className={this.link('CONTACT')}>
                         Informations pratiques
                     </Link>
                 </li>
             </Ul>
-        </Container>;
+        </Container>);
     }
 }
+
+Nav.propTypes = {
+    location: PropTypes.shape({
+        type: PropTypes.string,
+    }).isRequired,
+};
 
 const mapStateToProps = ({location}, ownProps) => ({location, ...ownProps});
 

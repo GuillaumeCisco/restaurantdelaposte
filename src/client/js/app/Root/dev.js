@@ -1,5 +1,3 @@
-/* globals document */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
@@ -11,14 +9,14 @@ import theme from '../../../../common/theme';
 import Routes from '../../../../common/routes';
 
 const Root = ({store}) =>
-    <Provider store={store}>
+    (<Provider store={store}>
         <MuiThemeProvider theme={theme}>
             <div>
-                <Routes/>
-                <DevTools/>
+                <Routes />
+                <DevTools />
             </div>
         </MuiThemeProvider>
-    </Provider>;
+    </Provider>);
 
 Root.propTypes = {
     store: PropTypes.shape({}).isRequired,

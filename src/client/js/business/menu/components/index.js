@@ -69,7 +69,7 @@ const Ul = styled('ul')`
 `;
 
 const Menu = props =>
-    <Wrapper>
+    (<Wrapper>
         <Shade>
             <Container>
                 <H1>Le Concept</H1>
@@ -85,7 +85,7 @@ const Menu = props =>
                             <h4>Formules à 13,00€</h4>
                             <div className={card}>
                                 <div>
-                                    Entrée + Plat<br/><i>ou</i><br/>Plat + Dessert
+                                    Entrée + Plat<br /><i>ou</i><br />Plat + Dessert
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@ const Menu = props =>
                             <h4>Menu à 16,10€</h4>
                             <div className={card}>
                                 <div>
-                                    Entrée<br/>Plat<br/>Dessert<br/>Boisson
+                                    Entrée<br />Plat<br />Dessert<br />Boisson
                                 </div>
                             </div>
                         </div>
@@ -102,6 +102,6 @@ const Menu = props =>
                 </Content>
             </Container>
         </Shade>
-    </Wrapper>;
+    </Wrapper>);
 
 export default Menu;
