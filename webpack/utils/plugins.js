@@ -21,21 +21,21 @@ export default env => [
         }),
         dll,
         ...(PRODUCTION ? [
-            // new webpack.optimize.UglifyJsPlugin({
-            //     compress: {
-            //         screw_ie8: true,
-            //         warnings: false,
-            //     },
-            //     mangle: {
-            //         screw_ie8: true,
-            //     },
-            //     output: {
-            //         screw_ie8: true,
-            //         comments: false,
-            //     },
-            //     sourceMap: true,
-            // }),
-            //new webpack.optimize.AggressiveMergingPlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    screw_ie8: true,
+                    warnings: false,
+                },
+                mangle: {
+                    screw_ie8: true,
+                },
+                output: {
+                    screw_ie8: true,
+                    comments: false,
+                },
+                sourceMap: true,
+            }),
+            new webpack.optimize.AggressiveMergingPlugin(),
             new StatsPlugin('stats.json'),
         ] : [
             new webpack.HotModuleReplacementPlugin(),
@@ -82,13 +82,13 @@ export default env => [
                     'transform-runtime',
                     'lodash',
                     'date-fns',
-                    // ...(PRODUCTION && env === 'frontend' ? [
-                    //     'transform-class-properties',
-                    //     'transform-es2015-classes',
-                    //     'transform-react-constant-elements',
-                    //     'transform-react-inline-elements',
-                    //     'transform-react-remove-prop-types',
-                    // ] : []),
+                    ...(PRODUCTION && env === 'frontend' ? [
+                        'transform-class-properties',
+                        'transform-es2015-classes',
+                        'transform-react-constant-elements',
+                        'transform-react-inline-elements',
+                        'transform-react-remove-prop-types',
+                    ] : []),
                     ...(DEVELOPMENT ? ['react-hot-loader/babel'] : []),
                 ],
                 presets: [
