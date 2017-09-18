@@ -1,18 +1,13 @@
 import React from 'react';
-import {keyframes, css} from 'emotion';
+import {css} from 'emotion';
 import styled from 'react-emotion';
 import Slider from '../../common/components/slider';
 
 import {Accroche, inlineP, H1, side} from '../../common/components/presentation';
-import Bg from '../../../../img/bg.jpg';
+import Background from './bg';
 
 const requireContext = require.context('../../../../img/home/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
-
-const fade = keyframes`
-  0% {opacity: 0} 
-  100% {opacity: 1}
-`;
 
 const Container = styled('div')`
     width: 100%;
@@ -24,20 +19,6 @@ const Content = styled('div')`
     font-size: 20px;
     text-align: justify;
     text-justify: inter-word;
-`;
-
-const img = css`
-    width: 100%;    
-`;
-
-const animatedImg = css`
-    composes: ${img};
-    animation: ${fade} 0.3s;
-`;
-
-const hiddenImg = css`
-    composes: ${img};
-    visibility: hidden;
 `;
 
 const wrapper = css`
@@ -58,14 +39,19 @@ const right = css`
 `;
 
 class Home extends React.Component {
+    state = {
+        imgLoaded: false,
+    };
+    onImgLoad = () => {
+        if (!this.state.imgLoaded) {
+            this.setState({imgLoaded: true});
+        }
+    };
+
     render() {
         return (<Container>
-            <img
-                className={typeof window !== 'undefined' ? animatedImg : hiddenImg}
-                src={Bg}
-                alt="bg"
-            />
-            <div className={wrapper}>
+            <Background loaded={this.state.imgLoaded} onLoad={this.onImgLoad} />
+            {this.state.imgLoaded && <div className={wrapper}>
                 <div className={left}>
                     <Slider items={items} height={500} />
                 </div>
@@ -89,6 +75,7 @@ class Home extends React.Component {
                     </Content>
                 </div>
             </div>
+            }
         </Container>);
     }
 }
