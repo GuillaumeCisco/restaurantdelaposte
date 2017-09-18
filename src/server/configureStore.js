@@ -1,9 +1,7 @@
 import createHistory from 'history/createMemoryHistory';
 import {NOT_FOUND} from 'redux-first-router';
-import atob from 'atob';
 
 import configureStore from '../common/configureStore/index';
-
 
 const doesRedirect = ({kind, pathname}, res) => {
     if (kind === 'redirect') {

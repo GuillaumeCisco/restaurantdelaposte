@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {keyframes, css} from 'emotion';
-import {onlyUpdateForPropTypes} from 'recompose';
+import {onlyUpdateForKeys} from 'recompose';
 import Bg from '../../../../img/bg.jpg';
 
 const fade = keyframes`
@@ -50,4 +50,4 @@ Background.propTypes = {
     onLoad: PropTypes.func.isRequired,
 };
 
-export default onlyUpdateForPropTypes(Background);
+export default onlyUpdateForKeys(['loaded'])(Background);
