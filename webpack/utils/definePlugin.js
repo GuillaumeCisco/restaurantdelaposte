@@ -1,5 +1,5 @@
-const webpack = require('webpack');
-const config = require('config');
+import webpack from 'webpack';
+import config from 'config';
 
 const PRODUCTION = (['production'].includes(process.env.NODE_ENV));
 

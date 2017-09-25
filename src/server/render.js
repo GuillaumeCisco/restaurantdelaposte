@@ -64,16 +64,25 @@ export default ({clientStats}) => async (req, res, next) => {
           ${styles}
           <style type="text/css">${css}</style>
           <style id="jss-server-side">${materialUiCss}</style>
-          <link rel="stylesheet prefetch" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
           ${cssHash}          
-          <script type='text/javascript' src='/reactVendors.js'></script>
-          <script type='text/javascript' src='/vendors.js'></script>
+          <script type="text/javascript" src="/reactVendors.js"></script>
+          <script type="text/javascript" src="/vendors.js"></script>
           ${js}
+          <script type="text/javascript">
+          'serviceWorker' in window.navigator && window.addEventListener('load', function() {
+              window.navigator.serviceWorker.register('service-worker.js')
+                .then(function(r) {
+                  console.log('ServiceWorker registration successful with scope: ', r.scope)
+                }).catch(function(e) {
+                  console.error('ServiceWorker registration failed: ', e)
+                })
+            });
+          </script>
         </body>
       </html>`,
     );
