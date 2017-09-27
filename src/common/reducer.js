@@ -1,4 +1,4 @@
-//import {reducer as formReducer} from 'redux-form';
+import {reducer as formReducer} from 'redux-form';
 
 import {actionTypes} from './actions';
 
@@ -17,6 +17,6 @@ export const general = (state = initialState, {type, payload}) => {
 };
 
 export default {
-    //form: formReducer,
+    form: formReducer,
     general,
 };

@@ -117,6 +117,7 @@
         "redux-actions": "2.2.1",
         "redux-first-router": "1.9.15",
         "redux-first-router-link": "^1.4.1",
+        "redux-form": "7.0.3",
         "redux-reducers-injector": "0.1.0",
         "redux-saga": "0.15.6",
         "redux-sagas-injector": "0.2.2",
