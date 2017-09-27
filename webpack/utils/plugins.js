@@ -112,10 +112,10 @@ export default env => [
         filename: '[name].css',
         allChunks: false,
     }),
-    new BundleAnalyzerPlugin({
+    ...(DEBUG ? [new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-    }),
-    new SWPrecacheWebpackPlugin(
+    })] : []),
+    ...(PRODUCTION ? [new SWPrecacheWebpackPlugin(
         {
             cacheId: config.appName,
             dontCacheBustUrlsMatching: /\.\w{8}\./,
@@ -129,5 +129,5 @@ export default env => [
             navigateFallback: '/',
             staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
         },
-    ),
+    )] : []),
 ];
