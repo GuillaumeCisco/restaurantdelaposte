@@ -5,6 +5,7 @@ import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HappyPack from 'happypack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 
 import definePlugin from './definePlugin';
 import dll from './dll';
@@ -104,5 +105,8 @@ export default env => [
     new ExtractCssChunks({
         filename: '[name].css',
         allChunks: false,
+    }),
+    new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
     }),
 ];

@@ -12,10 +12,5 @@
         "date-fns",
         "transform-class-properties",
         "transform-es2015-classes"
-    ],
-    "env": {
-        "development": {
-            "plugins": ["react-hot-loader/babel"]
-        }
-    }
+    ]
 }
