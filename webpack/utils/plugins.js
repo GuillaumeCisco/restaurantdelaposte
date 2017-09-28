@@ -16,8 +16,7 @@ import dll from './dll';
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV)),
     PRODUCTION = (['production'].includes(process.env.NODE_ENV)),
     DEBUG = !(['production', 'development', 'staging'].includes(process.env.NODE_ENV)),
-    PRODUCTION_BASE_NAME = config.apps.frontend.baseName.production,
-    DEBUG_BASE_NAME = config.apps.frontend.baseName.debug;
+    PRODUCTION_BASE_NAME = config.apps.frontend.baseName.production;
 
 export default env => [
     ...(env === 'frontend' ? [
@@ -126,7 +125,7 @@ export default env => [
                     path.resolve(__dirname, '../../src/client/js/index.js'),
                 ],
             },
-            navigateFallback: '/',
+            navigateFallback: PRODUCTION_BASE_NAME,
             staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
         },
     )] : []),

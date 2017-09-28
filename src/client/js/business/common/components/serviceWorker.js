@@ -1,3 +1,5 @@
+/* global window */
+
 import React from 'react';
 import {css, keyframes} from 'emotion';
 import styled from 'react-emotion';
@@ -64,7 +66,7 @@ class ServiceWorker extends React.Component {
     }
 
     render() {
-        return typeof window !== 'undefined' && window.navigator && typeof this.state.status !== 'undefined' ? (this.state.status ? <Green/> : <Red/>) : null;
+        return typeof window !== 'undefined' && window.navigator && typeof this.state.status !== 'undefined' ? (this.state.status ? <Green /> : <Red />) : null;
     }
 }
 

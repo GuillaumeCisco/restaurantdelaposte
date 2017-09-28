@@ -76,6 +76,6 @@ export default ({clientStats}) => async (req, res, next) => {
           ${js}          
           ${serviceWorker}
         </body>
-      </html>`
+      </html>`,
     );
 };
