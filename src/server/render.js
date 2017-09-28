@@ -16,6 +16,7 @@ import configureStore from './configureStore';
 
 import theme from '../common/theme/index';
 import App from '../common/routes';
+import serviceWorker from './serviceWorker';
 
 // Create a sheetsRegistry instance.
 const sheetsRegistry = new SheetsRegistry();
@@ -64,16 +65,16 @@ export default ({clientStats}) => async (req, res, next) => {
           ${styles}
           <style type="text/css">${css}</style>
           <style id="jss-server-side">${materialUiCss}</style>
-          <link rel="stylesheet prefetch" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
           ${cssHash}          
-          <script type='text/javascript' src='/reactVendors.js'></script>
-          <script type='text/javascript' src='/vendors.js'></script>
-          ${js}
+          <script type="text/javascript" src="/reactVendors.js"></script>
+          <script type="text/javascript" src="/vendors.js"></script>
+          ${js}          
+          ${serviceWorker}
         </body>
       </html>`,
     );

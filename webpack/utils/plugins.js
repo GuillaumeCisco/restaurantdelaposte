@@ -1,17 +1,22 @@
 import webpack from 'webpack';
 import config from 'config';
+import path from 'path';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HappyPack from 'happypack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
+import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
+import WriteFilePlugin from 'write-file-webpack-plugin';
 
 import definePlugin from './definePlugin';
 import dll from './dll';
 
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV)),
-    PRODUCTION = (['production'].includes(process.env.NODE_ENV));
+    PRODUCTION = (['production'].includes(process.env.NODE_ENV)),
+    DEBUG = !(['production', 'development', 'staging'].includes(process.env.NODE_ENV)),
+    PRODUCTION_BASE_NAME = config.apps.frontend.baseName.production;
 
 export default env => [
     ...(env === 'frontend' ? [
@@ -41,7 +46,7 @@ export default env => [
         ] : [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-
+            new WriteFilePlugin(),
             new BrowserSyncPlugin(
                 // BrowserSync options
                 {
@@ -106,7 +111,22 @@ export default env => [
         filename: '[name].css',
         allChunks: false,
     }),
-    new BundleAnalyzerPlugin({
+    ...(DEBUG ? [new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-    }),
+    })] : []),
+    ...(PRODUCTION ? [new SWPrecacheWebpackPlugin(
+        {
+            cacheId: config.appName,
+            dontCacheBustUrlsMatching: /\.\w{8}\./,
+            filename: 'service-worker.js',
+            minify: true,
+            dynamicUrlToDependencies: {
+                '/': [
+                    path.resolve(__dirname, '../../src/client/js/index.js'),
+                ],
+            },
+            navigateFallback: PRODUCTION_BASE_NAME,
+            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+        },
+    )] : []),
 ];
