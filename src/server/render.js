@@ -16,6 +16,7 @@ import configureStore from './configureStore';
 
 import theme from '../common/theme/index';
 import App from '../common/routes';
+import serviceWorker from './serviceWorker';
 
 // Create a sheetsRegistry instance.
 const sheetsRegistry = new SheetsRegistry();
@@ -72,34 +73,9 @@ export default ({clientStats}) => async (req, res, next) => {
           ${cssHash}          
           <script type="text/javascript" src="/reactVendors.js"></script>
           <script type="text/javascript" src="/vendors.js"></script>
-          ${js}
-          
-          ${process.env.NODE_ENV === 'production' ? `
-          <script type="text/javascript">
-          'serviceWorker' in window.navigator && window.addEventListener('load', function() {
-                  function updateOnlineStatus(event) {
-                    var condition = navigator.onLine ? "Live" : "Currently offline";               
-                    console.info(condition);
-                  }
-                
-                  window.addEventListener('online',  updateOnlineStatus);
-                  window.addEventListener('offline', updateOnlineStatus);              
-              
-                  // only register serviceWorker if online
-                  if (navigator.onLine) {
-                    window.navigator.serviceWorker.register('service-worker.js')
-                        .then(function(r) {
-                          console.log('ServiceWorker registration successful with scope: ', r.scope)
-                        }).catch(function(e) {
-                          console.error('ServiceWorker registration failed: ', e)
-                        })
-                  }
-                  else {
-                      console.warn('You are offline');
-                  }
-                });
-          </script>` : ''}
+          ${js}          
+          ${serviceWorker}
         </body>
-      </html>`,
+      </html>`
     );
 };

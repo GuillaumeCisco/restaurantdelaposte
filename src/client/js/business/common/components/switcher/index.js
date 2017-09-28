@@ -64,7 +64,7 @@ const Switcher = ({page}) =>
                     {getComponent(page)}
                 </Container>
             </Transition>
-        </TransitionGroup>;
+        </TransitionGroup>
     </div>);
 
 
