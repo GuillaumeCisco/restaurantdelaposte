@@ -3,7 +3,7 @@ import {css} from 'emotion';
 import styled from 'react-emotion';
 import Slider from '../../common/components/slider';
 
-import {Accroche, inlineP, H1, side} from '../../common/components/presentation';
+import {Accroche, Inlinep, H1, side} from '../../common/components/presentation';
 import Background from './bg';
 
 const requireContext = require.context('../../../../img/home/', true, /^\.\/.*\.jpg$/);
@@ -59,11 +59,11 @@ class Home extends React.Component {
                     <H1>Le Restaurant de la Poste <br />« Chez Robert »</H1>
                     <Content>
                         <Accroche>U</Accroche>
-                        <inlineP>ne table traditionnelle renommée à Boulogne-Billancourt.
+                        <Inlinep>ne table traditionnelle renommée à Boulogne-Billancourt.
                             Installés depuis 30 ans en face du marché Billancourt (Marcel Sembat), Jean-Philippe et son
                             équipe vous accueillent pour déjeuner tous les midis et le soir autour d’un verre accompagné
                             de petits toast au bar.
-                        </inlineP>
+                        </Inlinep>
 
                         <p>En salle, la convivialité et la rapidité sont de mise, le chef prépare une cuisine
                             traditionnelle recherchée selon les produits frais de saison qu’il se procure au marché.

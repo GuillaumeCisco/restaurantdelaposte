@@ -23,7 +23,7 @@ export const Accroche = styled('span')`
     position: relative;
 `;
 
-export const inlineP = styled('p')`
+export const Inlinep = styled('p')`
     display: inline;
 `;
 
