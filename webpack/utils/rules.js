@@ -13,19 +13,19 @@ export default env => [
         use: 'url-loader?limit=10000&name=[hash].[ext]',
     }, {
         test: /\.(otf|svg)(\?.+)?$/,
-        use: 'url-loader?limit=8192',
+        use: 'url-loader?limit=8192&name=[name].[ext]',
     }, {
         test: /\.eot(\?\S*)?$/,
-        use: 'url-loader?limit=100000&mimetype=application/vnd.ms-fontobject',
+        use: 'url-loader?limit=100000&mimetype=application/vnd.ms-fontobject&name=[name].[ext]',
     }, {
         test: /\.woff2(\?\S*)?$/,
-        use: 'url-loader?limit=100000&mimetype=application/font-woff2',
+        use: 'url-loader?limit=100000&mimetype=application/font-woff2&name=[name].[ext]',
     }, {
         test: /\.woff(\?\S*)?$/,
-        use: 'url-loader?limit=100000&mimetype=application/font-woff',
+        use: 'url-loader?limit=100000&mimetype=application/font-woff&name=[name].[ext]',
     }, {
         test: /\.ttf(\?\S*)?$/,
-        use: 'url-loader?limit=100000&mimetype=application/font-ttf',
+        use: 'url-loader?limit=10000&mimetype=application/font-ttf&name=[name].[ext]',
     }, {
         test: /\.html$/,
         use: 'html-loader',
@@ -72,9 +72,9 @@ export default env => [
         },
     ]) : [{
         test: /\.s?css$/,
-        exclude: /node_modules\/^(?!prismjs)/,
+        exclude: /node_modules/,
         use: ExtractCssChunks.extract({
-            use: ['css-loader?importLoaders=1&sourceMap=1', 'sass-loader?sourceMap&sourceComments'],
+            use: ['css-loader?importLoaders&sourceMap', 'sass-loader?sourceMap&sourceComments'],
         }),
     }]),
 ];

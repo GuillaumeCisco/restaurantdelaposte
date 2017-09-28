@@ -65,6 +65,7 @@ export default ({clientStats}) => async (req, res, next) => {
           ${styles}
           <style type="text/css">${css}</style>
           <style id="jss-server-side">${materialUiCss}</style>
+          <link rel="preload" href="ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
