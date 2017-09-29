@@ -29,6 +29,7 @@ export default merge.smart(baseConfig, {
             loaders: [{
                 path: 'babel-loader', // Options to configure babel with
                 query: {
+                    babelrc: false,
                     plugins: [
                         'universal-import',
                         'emotion',

@@ -4,6 +4,7 @@ import path from 'path';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
+import BabiliPlugin from 'babili-webpack-plugin';
 import HappyPack from 'happypack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
@@ -26,19 +27,10 @@ export default env => [
             minChunks: Infinity,
         }),
         dll,
-        ...(PRODUCTION ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    screw_ie8: true,
-                    warnings: false,
-                },
-                mangle: {
-                    screw_ie8: true,
-                },
-                output: {
-                    screw_ie8: true,
-                    comments: false,
-                },
+        ...(PRODUCTION ?
+            [
+            new BabiliPlugin({}, {
+                comments: false,
                 sourceMap: true,
             }),
             new webpack.optimize.AggressiveMergingPlugin(),
@@ -66,7 +58,8 @@ export default env => [
                     callback: () => console.log('Finished proxifying...'),
                 },
             ),
-        ]),
+        ])
+        ,
     ] : [
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1,
@@ -82,13 +75,13 @@ export default env => [
         loaders: [{
             path: 'babel-loader', // Options to configure babel with
             query: {
+                babelrc: false,
                 plugins: [
                     'universal-import',
                     'emotion',
                     'transform-runtime',
                     'lodash',
-                    'date-fns',
-                    ...(PRODUCTION && env === 'frontend' ? [
+                    ...(PRODUCTION ? [
                         'transform-class-properties',
                         'transform-es2015-classes',
                         'transform-react-constant-elements',
@@ -101,6 +94,17 @@ export default env => [
                     'es2015',
                     'react',
                     'stage-0',
+                    ['env', {
+                        modules: false,
+                        useBuiltIns: true,
+                        targets: {
+                            browsers: [
+                                '> 1%',
+                                'last 2 versions',
+                                'Firefox ESR',
+                            ],
+                        },
+                    }],
                 ],
             },
         }],

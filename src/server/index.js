@@ -6,6 +6,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
 import clientConfig from '../../webpack/client';
+import clientES6Config from '../../webpack/clientES6';
 import serverConfig from '../../webpack/server';
 
 const publicPath = clientConfig.output.publicPath;
@@ -21,20 +22,33 @@ const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NO
 if (DEVELOPMENT) {
     const multiCompiler = webpack([clientConfig, serverConfig]);
     const clientCompiler = multiCompiler.compilers[0];
+    const serverCompiler = multiCompiler.compilers[1];
 
     // First we fire up Webpack an pass in the configuration we
     // created
-    let bundleStart = null;
+    let clientBundleStart = null;
     // We give notice in the terminal when it starts bundling and
     // set the time it started
     clientCompiler.plugin('compile', () => {
-        console.log('Bundling...');
-        bundleStart = Date.now();
+        console.log('Bundling client...');
+        clientBundleStart = Date.now();
     });
     // We also give notice when it is done compiling, including the
     // time it took. Nice to have
     clientCompiler.plugin('done', () => {
-        console.log(`Bundled in ${(Date.now() - bundleStart)}ms!`);
+        console.log(`Bundled client in ${(Date.now() - clientBundleStart)}ms!`);
+    });
+    let serverBundleStart = null;
+    // We give notice in the terminal when it starts bundling and
+    // set the time it started
+    serverCompiler.plugin('compile', () => {
+        console.log('Bundling server...');
+        serverBundleStart = Date.now();
+    });
+    // We also give notice when it is done compiling, including the
+    // time it took. Nice to have
+    serverCompiler.plugin('done', () => {
+        console.log(`Bundled server in ${(Date.now() - serverBundleStart)}ms!`);
     });
 
     app.use(webpackDevMiddleware(multiCompiler, {
