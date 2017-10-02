@@ -110,7 +110,7 @@
         "react-helmet": "^5.2.0",
         "react-jss": "^7.2.0",
         "react-redux": "^5.0.6",
-        "react-tap-event-plugin": "3.0.0",
+        "react-tap-event-plugin": "3.0.1",
         "react-universal-component": "^2.5.5",
         "recompose": "^0.25.1",
         "redux": "^3.7.2",

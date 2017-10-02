@@ -1,6 +1,6 @@
 import React from 'react';
 import universal from 'react-universal-component';
 
-const Home = universal(props => import('./components/index'));
+const Universal = universal(props => import('../product/components/index'));
 
-export default props => <Home />;
+export default props => <Universal />;

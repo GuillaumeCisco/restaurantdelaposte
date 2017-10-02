@@ -1,6 +1,7 @@
 import React from 'react';
 import universal from 'react-universal-component';
 
-const Universal = universal(props => import('./components/index'));
+// need to pass different path for generating different chunks
+const Universal = universal(props => import('../events/components/index'));
 
 export default props => <Universal />;
