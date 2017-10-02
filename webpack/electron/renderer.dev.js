@@ -59,7 +59,6 @@ export default merge.smart(baseConfig, {
                         'emotion',
                         'transform-runtime',
                         'lodash',
-                        'date-fns',
                         'transform-class-properties',
                         'transform-es2015-classes',
                         'react-hot-loader/babel',

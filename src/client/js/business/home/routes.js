@@ -1,6 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import universal from 'react-universal-component';
 
-const Universal = universal(props => import('../home/components/index'));
+// need to pass different path for generating different chunks
+const Universal = universal(props => import('./components/index'));
 
-export default props => <Universal />;
+// need to connect for hot module replacement
+export default connect()(props => <Universal />);

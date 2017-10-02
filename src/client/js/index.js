@@ -1,7 +1,7 @@
 /* globals document window */
 
 import React from 'react';
-import {hydrate} from 'react-dom';
+import {hydrate, render} from 'react-dom';
 import FastClick from 'fastclick';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {hydrate as emotionHydrate} from 'emotion';
@@ -38,7 +38,8 @@ const renderApp = (RootElement) => {
         <RootElement {...{store}} />
     </ReactHotLoader>);
 
-    hydrate(app, root);
+    // render for electron, hydrate for SSR
+    return process.env.IS_ELECTRON !== 'false' ? render(app, root) : hydrate(app, root);
 };
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
