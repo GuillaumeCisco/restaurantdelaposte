@@ -13,10 +13,10 @@ export default new AutoDllPlugin({
         reactVendors: [
             'react',
             'react-dom',
-            //'react-emotion',
+            'react-emotion',
             'react-redux',
             'react-tap-event-plugin',
-            // 'react-universal-component',
+            'react-universal-component',
         ],
         reduxVendors: [
             'redux',
@@ -28,13 +28,13 @@ export default new AutoDllPlugin({
             'redux-sagas-injector'
         ],
         commonVendors: [
-            //'emotion',
+            'emotion',
             'fastclick',
-            //'google-map-react',
+            'google-map-react',
             'history',
-            //'react-helmet',
+            'react-helmet',
             'recompose',
-            //'transition-group',
+            'transition-group',
         ],
     },
 });

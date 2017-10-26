@@ -11,9 +11,6 @@ const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NO
     DEBUG_BASE_NAME = config.apps.frontend.baseName.debug;
 
 module.exports = {
-    // externals: [
-    //     /^babel-runtime/
-    // ],
     name: 'client',
     target: 'web',
     entry: {
@@ -22,8 +19,6 @@ module.exports = {
             'fetch-everywhere',
         ],
         main: [
-            // 'babel-polyfill',
-            // 'fetch-everywhere',
             ...(DEVELOPMENT ? [
                 'webpack-hot-middleware/client',
                 'react-hot-loader/patch',

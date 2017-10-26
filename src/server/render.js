@@ -12,9 +12,15 @@ import configureStore from './configureStore';
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
 
+import DevTools from '../common/DevTools';
+
+// include DevTools on server for react 6 hydrate method
 const createApp = (App, store) =>
     (<Provider store={store}>
-        <App />
+        <div>
+            <App/>
+            <DevTools/>
+        </div>
     </Provider>);
 
 
@@ -32,8 +38,6 @@ export default ({clientStats}) => async (req, res, next) => {
 
     console.log('REQUESTED PATH:', req.path);
     console.log('CHUNK NAMES', chunkNames);
-
-    console.log(html);
 
     return res.send(
         `<!doctype html>
@@ -55,7 +59,9 @@ export default ({clientStats}) => async (req, res, next) => {
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${process.env.NODE_ENV === 'production' ? html : `${html}`}
           ${cssHash}                    
-
+          <script type="text/javascript" src="/reactVendors-dll.js"></script>
+          <script type="text/javascript" src="/reduxVendors-dll.js"></script>
+          <script type="text/javascript" src="/commonVendors-dll.js"></script>
           ${js}    
           ${serviceWorker}
         </body>

@@ -25,23 +25,23 @@ export default env => [
             filename: '[name].js',
             minChunks: Infinity,
         }),
-        //dll,
+        dll,
         ...(PRODUCTION ? [
-            // new webpack.optimize.UglifyJsPlugin({
-            //     compress: {
-            //         screw_ie8: true,
-            //         warnings: false,
-            //     },
-            //     mangle: {
-            //         screw_ie8: true,
-            //     },
-            //     output: {
-            //         screw_ie8: true,
-            //         comments: false,
-            //     },
-            //     sourceMap: true,
-            // }),
-            // new webpack.optimize.AggressiveMergingPlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    screw_ie8: true,
+                    warnings: false,
+                },
+                mangle: {
+                    screw_ie8: true,
+                },
+                output: {
+                    screw_ie8: true,
+                    comments: false,
+                },
+                sourceMap: true,
+            }),
+            new webpack.optimize.AggressiveMergingPlugin(),
             new StatsPlugin('stats.json'),
         ] : [
             new webpack.HotModuleReplacementPlugin(),
@@ -72,7 +72,6 @@ export default env => [
             maxChunks: 1,
         }),
     ]),
-    new webpack.NamedModulesPlugin(),
     ...(DEVELOPMENT ? [new webpack.NamedModulesPlugin()] : []),
     definePlugin(),
     new LodashModuleReplacementPlugin({
