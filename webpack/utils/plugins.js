@@ -27,21 +27,21 @@ export default env => [
         }),
         dll,
         ...(PRODUCTION ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    screw_ie8: true,
-                    warnings: false,
-                },
-                mangle: {
-                    screw_ie8: true,
-                },
-                output: {
-                    screw_ie8: true,
-                    comments: false,
-                },
-                sourceMap: true,
-            }),
-            new webpack.optimize.AggressiveMergingPlugin(),
+            // new webpack.optimize.UglifyJsPlugin({
+            //     compress: {
+            //         screw_ie8: true,
+            //         warnings: false,
+            //     },
+            //     mangle: {
+            //         screw_ie8: true,
+            //     },
+            //     output: {
+            //         screw_ie8: true,
+            //         comments: false,
+            //     },
+            //     sourceMap: true,
+            // }),
+            // new webpack.optimize.AggressiveMergingPlugin(),
             new StatsPlugin('stats.json'),
         ] : [
             new webpack.HotModuleReplacementPlugin(),
@@ -72,6 +72,7 @@ export default env => [
             maxChunks: 1,
         }),
     ]),
+    new webpack.NamedModulesPlugin(),
     ...(DEVELOPMENT ? [new webpack.NamedModulesPlugin()] : []),
     definePlugin(),
     new LodashModuleReplacementPlugin({
@@ -82,12 +83,13 @@ export default env => [
         loaders: [{
             path: 'babel-loader', // Options to configure babel with
             query: {
+                // ignore babelrc
+                babelrc: false,
                 plugins: [
                     'universal-import',
-                    'emotion',
                     'transform-runtime',
+                    'emotion',
                     'lodash',
-                    'date-fns',
                     ...(PRODUCTION && env === 'frontend' ? [
                         'transform-class-properties',
                         'transform-es2015-classes',

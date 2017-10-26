@@ -19,11 +19,6 @@ if (window.EMOTION_IDS) {
     emotionHydrate(window.EMOTION_IDS);
 }
 
-// Remove the server-side injected CSS.
-const jssStyles = document.getElementById('jss-server-side');
-if (jssStyles && jssStyles.parentNode) {
-    jssStyles.parentNode.removeChild(jssStyles);
-}
 const {store} = configureStore(history, window.REDUX_STATE);
 
 FastClick.attach(document.body);

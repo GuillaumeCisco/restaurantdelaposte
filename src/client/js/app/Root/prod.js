@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {MuiThemeProvider} from 'material-ui/styles';
 
-import theme from '../../../../common/theme';
 import Routes from '../../../../common/routes';
 
 // For using browserHistory with amazon s3, we need our own domain name
@@ -34,9 +32,7 @@ import Routes from '../../../../common/routes';
 
 const Root = ({store}) =>
     (<Provider store={store}>
-        <MuiThemeProvider theme={theme}>
-            <Routes />
-        </MuiThemeProvider>
+        <Routes/>
     </Provider>);
 
 

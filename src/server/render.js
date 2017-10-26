@@ -2,36 +2,19 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import {JssProvider, SheetsRegistry} from 'react-jss';
-import {create} from 'jss';
-import preset from 'jss-preset-default';
 import {extractCritical} from 'emotion-server';
 import {Provider} from 'react-redux';
 import {flushChunkNames} from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-import {MuiThemeProvider} from 'material-ui/styles';
-import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
 import configureStore from './configureStore';
 
-import theme from '../common/theme/index';
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
 
-// Create a sheetsRegistry instance.
-const sheetsRegistry = new SheetsRegistry();
-
-// Configure JSS
-const jss = create(preset());
-jss.options.createGenerateClassName = createGenerateClassName;
-
 const createApp = (App, store) =>
     (<Provider store={store}>
-        <JssProvider registry={sheetsRegistry} jss={jss}>
-            <MuiThemeProvider theme={theme}>
-                <App />
-            </MuiThemeProvider>
-        </JssProvider>
+        <App/>
     </Provider>);
 
 
@@ -42,11 +25,11 @@ export default ({clientStats}) => async (req, res, next) => {
     const app = createApp(App, store);
     const {html, ids, css} = extractCritical(ReactDOM.renderToString(app));
 
-    // Grab the CSS from our sheetsRegistry.
-    const materialUiCss = sheetsRegistry.toString();
     const stateJson = JSON.stringify(store.getState());
     const chunkNames = flushChunkNames();
-    const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
+    const {js, scripts, styles, cssHash} = flushChunks(clientStats, {chunkNames});
+
+    console.log(`${js}`, 'Js: ', scripts);
 
     console.log('REQUESTED PATH:', req.path);
     console.log('CHUNK NAMES', chunkNames);
@@ -64,17 +47,18 @@ export default ({clientStats}) => async (req, res, next) => {
           <meta name="keywords" content="${META_KEYWORDS}" />
           ${styles}
           <style type="text/css">${css}</style>
-          <style id="jss-server-side">${materialUiCss}</style>
           <link rel="preload" href="ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
-          ${cssHash}          
-          <script type="text/javascript" src="/reactVendors.js"></script>
-          <script type="text/javascript" src="/vendors.js"></script>
-          ${js}          
+          ${cssHash}
+          <script type='text/javascript' src='/bootstrap.js'></script>        
+          <script type="text/javascript" src="/reactVendors-dll.js"></script>
+          <script type="text/javascript" src="/reduxVendors-dll.js"></script>
+          <script type="text/javascript" src="/vendors-dll.js"></script>
+          <script type='text/javascript' src='/components/index.js'></script>
           ${serviceWorker}
         </body>
       </html>`,

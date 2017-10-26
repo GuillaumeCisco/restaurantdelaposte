@@ -11,17 +11,26 @@ const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NO
     DEBUG_BASE_NAME = config.apps.frontend.baseName.debug;
 
 module.exports = {
+    // externals: [
+    //     /^babel-runtime/
+    // ],
     name: 'client',
     target: 'web',
-    entry: [
-        'babel-polyfill',
-        'fetch-everywhere',
-        ...(DEVELOPMENT ? [
-            'webpack-hot-middleware/client',
-            'react-hot-loader/patch',
-        ] : []),
-        path.resolve(__dirname, '../src/client/js/index.js'),
-    ],
+    entry: {
+        // vendor: [
+        //     'babel-polyfill',
+        //     'fetch-everywhere',
+        // ],
+        app: [
+            'babel-polyfill',
+            'fetch-everywhere',
+            ...(DEVELOPMENT ? [
+                'webpack-hot-middleware/client',
+                'react-hot-loader/patch',
+            ] : []),
+            path.resolve(__dirname, '../src/client/js/index.js'),
+        ],
+    },
     module: {
         rules: rules(),
     },
@@ -42,7 +51,8 @@ module.exports = {
         path: path.resolve(__dirname, '../build/client'),
         publicPath: DEBUG ? DEBUG_BASE_NAME : PRODUCTION_BASE_NAME,
     },
-    devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
+    devtool: 'cheap-module-source-map',
+    //devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
     plugins: plugins('frontend'),
     resolve: resolve(),
     ...(DEVELOPMENT ? {
