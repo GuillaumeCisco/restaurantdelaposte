@@ -2,21 +2,15 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import {JssProvider, SheetsRegistry} from 'react-jss';
 import {extractCritical} from 'emotion-server';
 import {Provider} from 'react-redux';
 import {flushChunkNames} from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-import {MuiThemeProvider} from 'material-ui/styles';
 
 import configureStore from './configureStore';
 
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
-
-// Create a sheetsRegistry instance.
-const sheetsRegistry = new SheetsRegistry();
-
 
 const createApp = (App, store) =>
     (<Provider store={store}>
@@ -32,17 +26,14 @@ export default ({clientStats}) => async (req, res, next) => {
     const {html, ids, css} = extractCritical(ReactDOM.renderToString(app));
 
     // Grab the CSS from our sheetsRegistry.
-    const materialUiCss = sheetsRegistry.toString();
     const stateJson = JSON.stringify(store.getState());
     const chunkNames = flushChunkNames();
     const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
 
-    console.log(`${js}`);
-
     console.log('REQUESTED PATH:', req.path);
     console.log('CHUNK NAMES', chunkNames);
 
-    console.log(process.env.NODE_ENV, html);
+    console.log(html);
 
     return res.send(
         `<!doctype html>
@@ -57,13 +48,12 @@ export default ({clientStats}) => async (req, res, next) => {
           <meta name="keywords" content="${META_KEYWORDS}" />
           ${styles}
           <style type="text/css">${css}</style>
-          <style id="jss-server-side">${materialUiCss}</style>
           <link rel="preload" href="ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
-          <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div></div><div id="test">${html}</div>`}</div>
+          <div id="root">${process.env.NODE_ENV === 'production' ? html : `${html}`}
           ${cssHash}                    
 
           ${js}    
