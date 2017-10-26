@@ -2,39 +2,39 @@ import path from 'path';
 import webpack from 'webpack';
 import AutoDllPlugin from 'autodll-webpack-plugin';
 
+const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
+
 export default new AutoDllPlugin({
     context: path.join(__dirname, '../..'),
     filename: '[name]-dll.js',
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
-    ],
+    plugins: !DEVELOPMENT ? [new webpack.optimize.UglifyJsPlugin()] : [],
     debug: true,
     entry: {
         reactVendors: [
             'react',
             'react-dom',
-            'react-emotion',
+            //'react-emotion',
             'react-redux',
             'react-tap-event-plugin',
             // 'react-universal-component',
         ],
         reduxVendors: [
             'redux',
-            // 'redux-actions',
-            // 'redux-first-router',
-            // 'redux-first-router-link',
-            // 'redux-reducers-injector',
-            // 'redux-saga',
-            // 'redux-sagas-injector'
+            'redux-actions',
+            'redux-first-router',
+            'redux-first-router-link',
+            'redux-reducers-injector',
+            'redux-saga',
+            'redux-sagas-injector'
         ],
-        vendors: [
-            'emotion',
+        commonVendors: [
+            //'emotion',
             'fastclick',
-            'google-map-react',
+            //'google-map-react',
             'history',
-            'react-helmet',
+            //'react-helmet',
             'recompose',
-            // 'transition-group',
+            //'transition-group',
         ],
     },
 });

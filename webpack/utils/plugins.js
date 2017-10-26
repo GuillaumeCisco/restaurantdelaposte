@@ -25,7 +25,7 @@ export default env => [
             filename: '[name].js',
             minChunks: Infinity,
         }),
-        dll,
+        //dll,
         ...(PRODUCTION ? [
             // new webpack.optimize.UglifyJsPlugin({
             //     compress: {

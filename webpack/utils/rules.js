@@ -10,7 +10,7 @@ export default env => [
         use: 'happypack/loader?id=babel',
     }, {
         test: /\.jpe?g$|\.gif$|\.png$/,
-        use: 'url-loader?limit=10000&name=[hash].[ext]',
+        use: 'url-loader?limit=10000&name=img/[hash].[ext]',
     }, {
         test: /\.(otf|svg)(\?.+)?$/,
         use: 'url-loader?limit=8192&name=[name].[ext]',

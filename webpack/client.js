@@ -17,13 +17,13 @@ module.exports = {
     name: 'client',
     target: 'web',
     entry: {
-        // vendor: [
-        //     'babel-polyfill',
-        //     'fetch-everywhere',
-        // ],
-        app: [
+        vendor: [
             'babel-polyfill',
             'fetch-everywhere',
+        ],
+        main: [
+            // 'babel-polyfill',
+            // 'fetch-everywhere',
             ...(DEVELOPMENT ? [
                 'webpack-hot-middleware/client',
                 'react-hot-loader/patch',
