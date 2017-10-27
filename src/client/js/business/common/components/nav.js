@@ -27,7 +27,7 @@ const base = css`
     `;
 
 const link = css`        
-        composes: ${base};
+        ${base};
         font-family: 'ShadedLarch';
         padding: 8px 0;
         font-size: 44px;
@@ -38,7 +38,7 @@ const link = css`
 
 class Nav extends React.Component {
     link = route => css`
-        composes: ${base};
+        ${base};
         color: ${this.props.location.type === route ? '#03070e' : '#444257'};
     `;
 

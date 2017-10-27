@@ -33,6 +33,7 @@ export default merge.smart(baseConfig, {
             loaders: [{
                 path: 'babel-loader', // Options to configure babel with
                 query: {
+                    babelrc: false,
                     plugins: [
                         'universal-import',
                         'emotion',
@@ -41,7 +42,6 @@ export default merge.smart(baseConfig, {
                         'date-fns',
                         'transform-class-properties',
                         'transform-es2015-classes',
-                        'react-hot-loader/babel',
                     ],
                     presets: [
                         'es2015',

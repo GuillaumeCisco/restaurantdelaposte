@@ -27,13 +27,13 @@ const wrapper = css`
 `;
 
 const left = css`
-    composes: ${side};
+    ${side};
     padding: 10px 2% 0;
     width: 46%;   
 `;
 
 const right = css`
-    composes: ${side};
+    ${side};
     padding: 0 4%;
     width: 42%;
 `;

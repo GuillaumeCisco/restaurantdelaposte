@@ -1,5 +1,3 @@
-import {reducer as formReducer} from 'redux-form';
-
 import {actionTypes} from './actions';
 
 const initialState = {error: ''};
@@ -17,6 +15,5 @@ export const general = (state = initialState, {type, payload}) => {
 };
 
 export default {
-    form: formReducer,
     general,
 };

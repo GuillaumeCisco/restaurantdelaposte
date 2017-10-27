@@ -13,15 +13,19 @@ const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NO
 module.exports = {
     name: 'client',
     target: 'web',
-    entry: [
-        'babel-polyfill',
-        'fetch-everywhere',
-        ...(DEVELOPMENT ? [
-            'webpack-hot-middleware/client',
-            'react-hot-loader/patch',
-        ] : []),
-        path.resolve(__dirname, '../src/client/js/index.js'),
-    ],
+    entry: {
+        vendor: [
+            'babel-polyfill',
+            'fetch-everywhere',
+        ],
+        main: [
+            ...(DEVELOPMENT ? [
+                'webpack-hot-middleware/client',
+                'react-hot-loader/patch',
+            ] : []),
+            path.resolve(__dirname, '../src/client/js/index.js'),
+        ],
+    },
     module: {
         rules: rules(),
     },

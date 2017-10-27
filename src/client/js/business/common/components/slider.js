@@ -12,7 +12,7 @@ const Ul = styled('ul')`
         list-style: none;
         position: absolute;
         width: 100%;
-        height: ${props => props.height};
+        height: ${props => props.height}px;
     };
 `;
 
@@ -25,7 +25,7 @@ const fadeOut = css`
 `;
 
 const img = (className, src, transitionSpeed) => css`
-    composes: ${className};
+    ${className};
     max-width: 100%;                                              
     transition: opacity ${transitionSpeed}s;
     background-image: url("${src}");

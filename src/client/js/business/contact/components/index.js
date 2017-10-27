@@ -51,13 +51,13 @@ const greatPlaceStyle = {
 };
 
 const area = css`
-    composes: ${side};
+    ${side};
     margin: 4%;
     width: 42%;
 `;
 
 const map = css`
-    composes: ${area};    
+    ${area};    
     height: 600px;
     padding-top: 50px;
 `;
@@ -72,18 +72,18 @@ const bus = css`
 `;
 
 const b123 = css`
-    composes: ${bus};
+    ${bus};
     background-color: rgb(0, 139, 90);;
 `;
 
 const b126 = css`    
-    composes: ${bus};
+    ${bus};
     color: black;
     background-color: rgb(135, 211, 223);
 `;
 
 const b175 = css`
-    composes: ${bus};
+    ${bus};
     background-color: rgb(0, 108, 184);
 `;
 

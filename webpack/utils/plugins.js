@@ -4,6 +4,7 @@ import path from 'path';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
+import BabiliPlugin from 'babili-webpack-plugin';
 import HappyPack from 'happypack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
@@ -12,6 +13,8 @@ import WriteFilePlugin from 'write-file-webpack-plugin';
 
 import definePlugin from './definePlugin';
 import dll from './dll';
+
+import routesMap from '../../src/common/routesMap';
 
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV)),
     PRODUCTION = (['production'].includes(process.env.NODE_ENV)),
@@ -27,18 +30,8 @@ export default env => [
         }),
         dll,
         ...(PRODUCTION ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    screw_ie8: true,
-                    warnings: false,
-                },
-                mangle: {
-                    screw_ie8: true,
-                },
-                output: {
-                    screw_ie8: true,
-                    comments: false,
-                },
+            new BabiliPlugin({}, {
+                comments: false,
                 sourceMap: true,
             }),
             new webpack.optimize.AggressiveMergingPlugin(),
@@ -82,12 +75,13 @@ export default env => [
         loaders: [{
             path: 'babel-loader', // Options to configure babel with
             query: {
+                // ignore babelrc
+                babelrc: false,
                 plugins: [
                     'universal-import',
-                    'emotion',
                     'transform-runtime',
+                    'emotion',
                     'lodash',
-                    'date-fns',
                     ...(PRODUCTION && env === 'frontend' ? [
                         'transform-class-properties',
                         'transform-es2015-classes',
@@ -117,14 +111,16 @@ export default env => [
     ...(PRODUCTION ? [new SWPrecacheWebpackPlugin(
         {
             cacheId: config.appName,
-            dontCacheBustUrlsMatching: /\.\w{8}\./,
             filename: 'service-worker.js',
-            minify: true,
-            dynamicUrlToDependencies: {
-                '/': [
-                    path.resolve(__dirname, '../../src/client/js/index.js'),
-                ],
-            },
+            minify: false,
+            dynamicUrlToDependencies: Object.keys(routesMap).reduce((p, c) => [...p, routesMap[c].path], []).reduce((p, c) =>
+                ({
+                    ...p,
+                    [c]: [
+                        path.resolve(__dirname, '../../src/client/js/index.js'),
+                        path.resolve(__dirname, `../../src/client/js/business${c === '/' ? '/home/' : c}components/index.js`),
+                    ],
+                }), {}),
             navigateFallback: PRODUCTION_BASE_NAME,
             staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
         },

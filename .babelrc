@@ -7,8 +7,6 @@
     "plugins": [
         "universal-import",
         "transform-runtime",
-        "emotion",
-        "lodash",
         "transform-class-properties",
         "transform-es2015-classes"
     ]
