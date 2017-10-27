@@ -25,11 +25,12 @@ const createApp = (App, store) =>
 
 
 // TODO: handle [hash]
-const flushDll = (clientStats) => Object.keys(Dll.originalSettings.entry).map(o =>
-    `<script type="text/javascript" src="${clientStats.publicPath}${Dll.originalSettings.filename.replace(/\[name\]/, o)}"></script>`,
+const flushDll = (clientStats) => Object.keys(Dll._originalSettings.entry).map(o =>
+    `<script type="text/javascript" src="${clientStats.publicPath}${Dll._originalSettings.filename.replace(/\[name\]/, o)}"></script>`,
 ).join('\n');
 
 export default ({clientStats}) => async (req, res, next) => {
+
     const store = await configureStore(req, res);
     if (!store) return; // no store means redirect was already served
 

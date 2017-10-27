@@ -26,12 +26,12 @@ const worker = css`
 `;
 
 const Green = styled('span')`
-    composes: ${worker};
+    ${worker};
     background-color: #27e86d;
 `;
 
 const Red = styled('span')`
-    composes: ${worker};
+    ${worker};
     background-color: #c30e15;
 `;
 

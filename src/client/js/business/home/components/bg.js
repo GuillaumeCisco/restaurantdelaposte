@@ -14,12 +14,12 @@ const img = css`
 `;
 
 const animatedImg = css`
-    composes: ${img};
+    ${img};
     animation: ${fade} 0.3s;
 `;
 
 const hiddenImg = css`
-    composes: ${img};
+    ${img};
     visibility: hidden;
 `;
 

@@ -35,7 +35,7 @@ const Content = styled('div')`
 `;
 
 const close = css`
-    composes: ${side}; 
+    ${side}; 
     width: 350px;
     margin: 1%;     
 `;
