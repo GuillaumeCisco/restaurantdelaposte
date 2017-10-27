@@ -79,12 +79,13 @@ export default env => [
                 babelrc: false,
                 plugins: [
                     'universal-import',
+                    'transform-class-properties',
                     'transform-runtime',
                     'emotion',
                     'lodash',
                     ...(PRODUCTION && env === 'frontend' ? [
-                        'transform-class-properties',
                         'transform-es2015-classes',
+                        'transform-class-properties',
                         'transform-react-constant-elements',
                         'transform-react-inline-elements',
                         'transform-react-remove-prop-types',

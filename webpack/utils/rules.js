@@ -6,7 +6,7 @@ const PRODUCTION = (['production'].includes(process.env.NODE_ENV));
 export default env => [
     {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: /node_modules\/(?!(redux-devtools-log-monitor|redux-devtools-instrument|redux-devtools)\/).*/,
         use: 'happypack/loader?id=babel',
     },
     {

@@ -18,15 +18,16 @@ import Dll from '../../webpack/utils/dll';
 
 // include DevTools on server for react 16 hydrate method
 const Wrapper = process.env.NODE_ENV !== 'production'
-    ? ({children}) => <div>{children}<DevTools/></div>
+    ? ({children}) => <div>{children}</div>
     : ({children}) => React.Children.only(children);
 
-const createApp = (App, store) =>
-    (<Provider store={store}>
+const createApp = (App, store) => {
+    return (<Provider store={store}>
         <Wrapper>
             <App/>
         </Wrapper>
     </Provider>);
+};
 
 
 // TODO: handle [hash]

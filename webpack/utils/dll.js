@@ -18,7 +18,7 @@ export default new AutoDllPlugin({
         reactVendors: [
             'react',
             'react-dom',
-            'react-emotion',
+            //'react-emotion',
             'react-redux',
             'react-tap-event-plugin',
         ],
@@ -32,7 +32,7 @@ export default new AutoDllPlugin({
             'redux-sagas-injector'
         ],
         commonVendors: [
-            'emotion',
+            //'emotion',
             'fastclick',
             'google-map-react',
             'history',

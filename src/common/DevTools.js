@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Exported from redux-devtools
-import {createDevTools} from 'redux-devtools';
+import {createDevTools} from 'redux-devtools/src/index';
 
 // Monitors are separate packages, and you can make a custom one
-import LogMonitor from 'redux-devtools-log-monitor';
+import LogMonitor from 'redux-devtools-log-monitor/src/LogMonitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 import SliderMonitor from 'redux-slider-monitor';
 import FilterMonitor from 'redux-devtools-filter-actions';
