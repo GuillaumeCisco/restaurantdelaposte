@@ -46,8 +46,7 @@ module.exports = {
         path: path.resolve(__dirname, '../build/client'),
         publicPath: DEBUG ? DEBUG_BASE_NAME : PRODUCTION_BASE_NAME,
     },
-    devtool: 'cheap-module-source-map',
-    //devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
+    devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
     plugins: plugins('frontend'),
     resolve: resolve(),
     ...(DEVELOPMENT ? {

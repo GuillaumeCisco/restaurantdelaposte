@@ -12,17 +12,22 @@ import configureStore from './configureStore';
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
 
-import DevTools from '../common/DevTools';
+import Dll from '../../webpack/utils/dll';
+
 
 // include DevTools on server for react 6 hydrate method
 const createApp = (App, store) =>
     (<Provider store={store}>
         <div>
             <App/>
-            <DevTools/>
         </div>
     </Provider>);
 
+
+// TODO: handle [hash]
+const flushDll = (clientStats) => Object.keys(Dll.originalSettings.entry).map(o =>
+    `<script type="text/javascript" src="${clientStats.publicPath}${Dll.originalSettings.filename.replace(/\[name\]/, o)}"></script>`,
+).join('\n');
 
 export default ({clientStats}) => async (req, res, next) => {
     const store = await configureStore(req, res);
@@ -35,6 +40,7 @@ export default ({clientStats}) => async (req, res, next) => {
     const stateJson = JSON.stringify(store.getState());
     const chunkNames = flushChunkNames();
     const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
+    const dll = flushDll(clientStats);
 
     console.log('REQUESTED PATH:', req.path);
     console.log('CHUNK NAMES', chunkNames);
@@ -52,16 +58,14 @@ export default ({clientStats}) => async (req, res, next) => {
           <meta name="keywords" content="${META_KEYWORDS}" />
           ${styles}
           <style type="text/css">${css}</style>
-          <link rel="preload" href="ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
+          <link rel="preload" href="font/ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
-          <div id="root">${process.env.NODE_ENV === 'production' ? html : `${html}`}
+          <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}
           ${cssHash}                    
-          <script type="text/javascript" src="/reactVendors-dll.js"></script>
-          <script type="text/javascript" src="/reduxVendors-dll.js"></script>
-          <script type="text/javascript" src="/commonVendors-dll.js"></script>
+          ${dll}
           ${js}    
           ${serviceWorker}
         </body>
