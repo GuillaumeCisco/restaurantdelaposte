@@ -6,7 +6,7 @@ import {TransitionGroup, Transition} from 'transition-group';
 
 import HomeRoutes from '../../../home/routes';
 import MenuRoutes from '../../../menu/routes';
-import ProductRoutes from '../../../product/routes';
+import ProductRoutes from '../../../products/routes';
 import EventRoutes from '../../../events/routes';
 import ContactRoutes from '../../../contact/routes';
 

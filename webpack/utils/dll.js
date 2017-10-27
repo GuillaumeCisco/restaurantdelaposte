@@ -7,7 +7,12 @@ const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
 export default new AutoDllPlugin({
     context: path.join(__dirname, '../..'),
     filename: '[name]-dll.js',
-    plugins: !DEVELOPMENT ? [new webpack.optimize.UglifyJsPlugin()] : [],
+    plugins: !DEVELOPMENT ? [
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production'),
+        })
+    ] : [],
     debug: true,
     entry: {
         reactVendors: [
@@ -16,7 +21,6 @@ export default new AutoDllPlugin({
             'react-emotion',
             'react-redux',
             'react-tap-event-plugin',
-            'react-universal-component',
         ],
         reduxVendors: [
             'redux',

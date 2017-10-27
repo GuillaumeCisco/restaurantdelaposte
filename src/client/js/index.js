@@ -34,7 +34,7 @@ const renderApp = (RootElement) => {
     </ReactHotLoader>);
 
     // render for electron, hydrate for SSR
-    return process.env.IS_ELECTRON !== 'false' ? render(app, root) : render(app, root);
+    return process.env.IS_ELECTRON !== 'false' ? render(app, root) : hydrate(app, root);
 };
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {

@@ -11,16 +11,21 @@ import configureStore from './configureStore';
 
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
+import DevTools from '../common/DevTools';
 
 import Dll from '../../webpack/utils/dll';
 
 
-// include DevTools on server for react 6 hydrate method
+// include DevTools on server for react 16 hydrate method
+const Wrapper = process.env.NODE_ENV !== 'production'
+    ? ({children}) => <div>{children}<DevTools/></div>
+    : ({children}) => React.Children.only(children);
+
 const createApp = (App, store) =>
     (<Provider store={store}>
-        <div>
+        <Wrapper>
             <App/>
-        </div>
+        </Wrapper>
     </Provider>);
 
 
@@ -59,15 +64,15 @@ export default ({clientStats}) => async (req, res, next) => {
           <meta name="keywords" content="${META_KEYWORDS}" />
           ${styles}
           <style type="text/css">${css}</style>
-          <link rel="preload" href="font/ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
+          <link rel="preload" href="/font/ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
         <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
-          <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}
-          ${cssHash}                    
+          <div id="root">${html}</div>
+          ${cssHash}
           ${dll}
-          ${js}    
+          ${js}
           ${serviceWorker}
         </body>
       </html>`,
