@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
-import {css} from 'emotion';
+import styled, {css} from 'react-emotion';
 
 import {H1, side} from '../../common/components/presentation';
 

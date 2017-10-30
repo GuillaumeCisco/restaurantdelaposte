@@ -1,5 +1,4 @@
-import {css} from 'emotion';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 
 export const H1 = styled('h1')`
     position: relative;

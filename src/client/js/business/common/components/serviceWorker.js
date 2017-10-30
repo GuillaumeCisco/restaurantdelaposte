@@ -1,8 +1,7 @@
 /* global window */
 
 import React from 'react';
-import {css, keyframes} from 'emotion';
-import styled from 'react-emotion';
+import styled, {css, keyframes} from 'react-emotion';
 
 const fade = keyframes`
   0% {opacity: 0}

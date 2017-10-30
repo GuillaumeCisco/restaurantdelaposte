@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {pure} from 'recompose';
-import styled from 'react-emotion';
-import {css} from 'emotion';
+import styled, {css} from 'react-emotion';
 
 const Ul = styled('ul')`
     position: relative;

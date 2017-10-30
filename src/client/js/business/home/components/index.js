@@ -1,6 +1,5 @@
 import React from 'react';
-import {css} from 'emotion';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import Slider from '../../common/components/slider';
 
 import {Accroche, Inlinep, H1, side} from '../../common/components/presentation';

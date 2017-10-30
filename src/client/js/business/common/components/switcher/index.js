@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'emotion';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import {TransitionGroup, Transition} from 'transition-group';
 
 import HomeRoutes from '../../../home/routes';

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import {css} from 'emotion';
+import styled, {css} from 'react-emotion';
 import GoogleMapReact from 'google-map-react';
 
 import {side} from '../../common/components/presentation';
