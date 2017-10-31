@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css} from 'emotion';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import Link from 'redux-first-router-link';
 import {connect} from 'react-redux';
 
