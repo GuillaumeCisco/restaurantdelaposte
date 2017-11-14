@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'react-emotion';
 import {TransitionGroup, Transition} from 'transition-group';
 
-import HomeRoutes from '../../../home/routes';
+import HomeRoutes from '../../../home/routes/electron';
 import MenuRoutes from '../../../menu/routes';
 import ProductRoutes from '../../../products/routes';
 import EventRoutes from '../../../events/routes';

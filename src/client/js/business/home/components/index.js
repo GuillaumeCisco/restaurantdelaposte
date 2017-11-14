@@ -61,7 +61,7 @@ class Home extends React.Component {
                         <Inlinep>ne table traditionnelle renommée à Boulogne-Billancourt.
                             Installés depuis 30 ans en face du marché Billancourt (Marcel Sembat), Jean-Philippe et son
                             équipe vous accueillent pour déjeuner tous les midis et le soir autour d’un verre accompagné
-                            de petits toast au bar.
+                            de petits toasts au bar.
                         </Inlinep>
 
                         <p>En salle, la convivialité et la rapidité sont de mise, le chef prépare une cuisine
