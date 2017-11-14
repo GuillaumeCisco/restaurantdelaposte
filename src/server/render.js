@@ -11,21 +11,12 @@ import configureStore from './configureStore';
 
 import App from '../common/routes';
 import serviceWorker from './serviceWorker';
-import DevTools from '../common/DevTools';
 
 import Dll from '../../webpack/utils/dll';
 
-
-// include DevTools on server for react 16 hydrate method
-const Wrapper = process.env.NODE_ENV !== 'production'
-    ? ({children}) => <div>{children}<DevTools/></div>
-    : ({children}) => React.Children.only(children);
-
 const createApp = (App, store) =>
     (<Provider store={store}>
-        <Wrapper>
-            <App/>
-        </Wrapper>
+        <App/>
     </Provider>);
 
 
@@ -70,6 +61,7 @@ export default ({clientStats}) => async (req, res, next) => {
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${html}</div>
+          {process.env.NODE_ENV === 'development' ? <div id="devTools"></div> : ''}
           ${cssHash}
           ${dll}
           ${js}

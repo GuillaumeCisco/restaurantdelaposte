@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 
-import Routes from '../../../../common/routes';
+import Routes from '../../../common/routes';
 
 // For using browserHistory with amazon s3, we need our own domain name
 // and a custom routerHistory
