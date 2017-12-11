@@ -9,7 +9,7 @@ import flushChunks from 'webpack-flush-chunks';
 
 import configureStore from './configureStore';
 
-import App from '../common/routes';
+import App from '../app';
 import serviceWorker from './serviceWorker';
 
 import Dll from '../../webpack/utils/dll';

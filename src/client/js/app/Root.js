@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 
-import Routes from '../../../common/routes';
+import App from '../../../app';
 
 // For using browserHistory with amazon s3, we need our own domain name
 // and a custom routerHistory
@@ -30,10 +30,11 @@ import Routes from '../../../common/routes';
 //     history.replace(path);
 // }
 
-const Root = ({store}) =>
-    (<Provider store={store}>
-        <Routes/>
-    </Provider>);
+const Root = ({store}) => (
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
 
 
 Root.propTypes = {
