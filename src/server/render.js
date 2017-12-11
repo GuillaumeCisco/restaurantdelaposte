@@ -14,10 +14,11 @@ import serviceWorker from './serviceWorker';
 
 import Dll from '../../webpack/utils/dll';
 
-const createApp = (App, store) =>
-    (<Provider store={store}>
-        <App/>
-    </Provider>);
+const createApp = (App, store) => (
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
 
 
 // TODO: handle [hash]

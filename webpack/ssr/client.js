@@ -10,7 +10,7 @@ const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NO
     PRODUCTION_BASE_NAME = config.apps.frontend.baseName.production,
     DEBUG_BASE_NAME = config.apps.frontend.baseName.debug;
 
-module.exports = {
+export default {
     name: 'client',
     target: 'web',
     entry: {

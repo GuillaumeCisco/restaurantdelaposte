@@ -1,25 +1,39 @@
-import express from 'express';
 import compression from 'compression';
-import cookieParser from 'cookie-parser';
 import config from 'config';
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
-import clientConfig from './client';
-import serverConfig from './server';
 
-const publicPath = clientConfig.output.publicPath;
-const outputPath = clientConfig.output.path;
+// Must be imported in that way to be include in prod
+import clientConfig from '../../webpack/ssr/client';
+import serverConfig from '../../webpack/ssr/server';
+
+
+const DEBUG = !(['production', 'development', 'staging']
+    .includes(process.env.NODE_ENV));
+const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
+
+
+// Redefined publicPath and outputPath instead of import clientConfig to solve
+// prod importation problems
+const publicPath = DEBUG ? (
+    config.apps.frontend.baseName.debug
+) : (
+    config.apps.frontend.baseName.production
+);
+const outputPath = path.resolve(__dirname, '../../build/ssr/client');
+
+
 const app = express();
 app.use(cookieParser());
 app.use(compression());
 
-const DEBUG = !(['production', 'development', 'staging'].includes(process.env.NODE_ENV)),
-    DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
 
 // UNIVERSAL HMR + STATS HANDLING GOODNESS:
-
 if (DEVELOPMENT) {
     const multiCompiler = webpack([clientConfig, serverConfig]);
     const clientCompiler = multiCompiler.compilers[0];
@@ -69,8 +83,8 @@ if (DEVELOPMENT) {
     );
 }
 else {
-    const clientStats = require('../../build/client/stats.json'); // eslint-disable-line import/no-unresolved
-    const serverRender = require('../../build/server/main.js').default; // eslint-disable-line import/no-unresolved
+    const clientStats = require('../../build/ssr/client/stats.json'); // eslint-disable-line import/no-unresolved
+    const serverRender = require('../../build/ssr/server/main.js').default; // eslint-disable-line import/no-unresolved
 
     app.use(publicPath, express.static(outputPath));
     app.use(serverRender({clientStats, outputPath}));

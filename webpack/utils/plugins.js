@@ -78,9 +78,7 @@ export default env => [
                 // ignore babelrc
                 babelrc: false,
                 plugins: [
-                    ['universal-import', {
-                        'disableWarnings': true
-                    }],
+                    ['universal-import', {disableWarnings: true}],
                     'transform-runtime',
                     'emotion',
                     'lodash',
@@ -120,7 +118,7 @@ export default env => [
                     ...p,
                     [c]: [
                         path.resolve(__dirname, '../../src/client/index.js'),
-                        path.resolve(__dirname, `../../src/client/business${c === '/' ? '/home/' : c}components/index.js`),
+                        path.resolve(__dirname, `../../src/app/routes${c === '/' ? '/home/' : c}components/index.js`),
                     ],
                 }), {}),
             navigateFallback: PRODUCTION_BASE_NAME,

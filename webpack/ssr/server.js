@@ -29,7 +29,7 @@ const externals = fs
         [mod]: `commonjs ${mod}`,
     }));
 
-module.exports = {
+export default {
     name: 'server',
     target: 'node',
     devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
@@ -40,7 +40,7 @@ module.exports = {
     ],
     externals,
     output: {
-        path: res('../build/ssr/server'),
+        path: res('../../build/ssr/server'),
         filename: '[name].js',
         libraryTarget: 'commonjs2',
         publicPath: DEBUG ? DEBUG_BASE_NAME : PRODUCTION_BASE_NAME,
