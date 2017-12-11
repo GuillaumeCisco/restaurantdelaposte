@@ -5,7 +5,7 @@ import {createInjectSagasStore, sagaMiddleware} from 'redux-sagas-injector';
 import options from './options';
 import rootReducer from '../../app/reducer';
 import rootSaga from '../../app/sagas';
-import {routes} from '../../app/routes';
+import routes from '../../app/routesMap';
 
 const configureStore = (history, initialState) => {
     const {reducer, middleware, enhancer, thunk, initialDispatch} = connectRoutes(history, routes, {

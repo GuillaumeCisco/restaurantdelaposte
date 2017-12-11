@@ -5,7 +5,8 @@ import styled from 'react-emotion';
 
 import Switcher from './routes/common/components/switcher/index';
 import ServiceWorker from './routes/common/components/serviceWorker';
-import routes from './routes';
+import getRoute from './routes';
+import routes from './routesMap';
 
 const Container = styled('div')`
     height: 100%;
@@ -14,9 +15,13 @@ const Container = styled('div')`
 const Routes = ({location}) => (
     <Container>
         <ServiceWorker />
-        {Object.keys(routes).includes(location.type) ?
-            <Switcher page={location.type} /> :
-            <h1>Not Found</h1>}
+        {Object.keys(routes).includes(location.type) ? (
+            <Switcher page={location.type}>
+                {getRoute(location.type)}
+            </Switcher>
+        ) : (
+            <h1>Not Found</h1>
+        )}
     </Container>
 );
 

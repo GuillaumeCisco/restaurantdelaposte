@@ -14,7 +14,7 @@ import WriteFilePlugin from 'write-file-webpack-plugin';
 import definePlugin from './definePlugin';
 import dll from './dll';
 
-import {routes} from '../../src/app/routes';
+import routes from '../../src/app/routesMap';
 
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV)),
     PRODUCTION = (['production'].includes(process.env.NODE_ENV)),

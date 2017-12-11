@@ -4,6 +4,7 @@ import styled, {css} from 'react-emotion';
 import Link from 'redux-first-router-link';
 import {connect} from 'react-redux';
 
+
 const Container = styled('div')`
     text-align: center;
     padding-top: 60px;
@@ -13,8 +14,8 @@ const Ul = styled('ul')`
     border-top: 1px solid #ccc;
     margin-top: 30px;
     padding-top: 15px;
-    & li {                
-        margin: 0 5%; 
+    & li {
+        margin: 0 5%;
         display: inline-block;
         font-size: 16px;
     }
@@ -25,13 +26,13 @@ const base = css`
         color: #444257;
     `;
 
-const link = css`        
+const link = css`
         ${base};
         font-family: 'ShadedLarch';
         padding: 8px 0;
         font-size: 44px;
         font-weight: 200;
-        border: 2px solid #ccc;        
+        border: 2px solid #ccc;
         border-width: 2px 0;
     `;
 

@@ -1,7 +1,7 @@
 import path from 'path';
 import {redirect} from 'redux-first-router';
 import {endsWith} from 'lodash';
-import {routes} from '../../app/routes';
+import routes from '../../app/routesMap';
 
 export default {
     onBeforeChange: (dispatch, getState, action) => {
