@@ -8,4 +8,4 @@
 !package-lock.json
 !config
 !.babelrc
-!src/common/routesMap.js
+!src/app/routesMap.js
