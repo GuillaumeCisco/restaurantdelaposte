@@ -3,8 +3,8 @@ import styled, {css} from 'react-emotion';
 
 import {H1, side} from '../../common/components/presentation';
 
-import slate from '../../../../../../assets/img/slate.jpg';
-import bg from '../../../../../../assets/img/home/main3.jpg';
+import slate from '../../../../../assets/img/slate.jpg';
+import bg from '../../../../../assets/img/home/main3.jpg';
 
 
 const Wrapper = styled('div')`

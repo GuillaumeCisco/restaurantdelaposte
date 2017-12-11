@@ -5,7 +5,7 @@ import Slider from '../../common/components/slider';
 import {Accroche, Inlinep, H1, side} from '../../common/components/presentation';
 import Background from './bg';
 
-const requireContext = require.context('../../../../../../assets/img/home/', true, /^\.\/.*\.jpg$/);
+const requireContext = require.context('../../../../../assets/img/home/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
 
 const Container = styled('div')`

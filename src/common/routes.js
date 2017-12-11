@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styled from 'react-emotion';
 
-import Switcher from '../client/js/business/common/components/switcher/index';
-import ServiceWorker from '../client/js/business/common/components/serviceWorker';
+import Switcher from '../app/routes/common/components/switcher/index';
+import ServiceWorker from '../app/routes/common/components/serviceWorker';
 import routes from './routesMap';
 
 const Container = styled('div')`

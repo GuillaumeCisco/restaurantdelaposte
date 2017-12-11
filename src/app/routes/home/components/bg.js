@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {keyframes, css} from 'emotion';
 import {onlyUpdateForKeys} from 'recompose';
-import Bg from '../../../../../../assets/img/bg.jpg';
+import Bg from '../../../../../assets/img/bg.jpg';
 
 const fade = keyframes`
   0% {opacity: 0}

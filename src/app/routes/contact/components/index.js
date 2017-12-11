@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react';
 
 import {side} from '../../common/components/presentation';
 
-import Pin from '../../../../../../assets/img/map-pin-red-md.png';
+import Pin from '../../../../../assets/img/map-pin-red-md.png';
 
 const Container = styled('div')`
     width: 1000px;
