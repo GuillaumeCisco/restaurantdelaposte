@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from 'react-emotion';
 
-import {H1, side} from '../../common/components/presentation';
+import {H1, side} from '../../../components/presentation';
 
 import slate from '../../../../../assets/img/slate.jpg';
 import bg from '../../../../../assets/img/home/main3.jpg';

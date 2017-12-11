@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'react-emotion';
 import GoogleMapReact from 'google-map-react';
 
-import {side} from '../../common/components/presentation';
+import {side} from '../../../components/presentation';
 
 import Pin from '../../../../../assets/img/map-pin-red-md.png';
 

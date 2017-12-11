@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 
-import {Accroche, Inlinep, H1} from '../../common/components/presentation';
+import {Accroche, Inlinep, H1} from '../../../components/presentation';
 
 const Container = styled('div')`
     width: 800px;
@@ -12,7 +12,7 @@ const Content = styled('div')`
     margin-top: 70px;
     margin-left: 10px;
     font-size: 20px;
-    justify-content: center; 
+    justify-content: center;
 `;
 
 const Home = props =>

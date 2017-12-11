@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, {css} from 'react-emotion';
-import Slider from '../../common/components/slider';
+import Slider from '../../../components/slider';
 
-import {Accroche, Inlinep, H1, side} from '../../common/components/presentation';
+import {Accroche, Inlinep, H1, side} from '../../../components/presentation';
 import Background from './bg';
 
 const requireContext = require.context('../../../../../assets/img/home/', true, /^\.\/.*\.jpg$/);

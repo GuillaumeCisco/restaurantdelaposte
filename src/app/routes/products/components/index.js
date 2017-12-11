@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
-import Slider from '../../common/components/slider';
+import Slider from '../../../components/slider';
 
 const requireContext = require.context('../../../../../assets/img/products/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
