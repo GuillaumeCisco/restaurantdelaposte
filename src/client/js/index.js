@@ -11,7 +11,7 @@ import ReactHotLoader from './ReactHotLoader';
 import Root from './app/Root';
 import history from './app/history';
 import configureStore from '../../common/configureStore';
-import '../css/index.scss';
+import '../../../assets/css/index.scss';
 import DevTools from '../../common/DevTools';
 
 /** ******************

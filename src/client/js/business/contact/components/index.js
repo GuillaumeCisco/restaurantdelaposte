@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react';
 
 import {side} from '../../common/components/presentation';
 
-import Pin from '../../../../img/map-pin-red-md.png';
+import Pin from '../../../../../../assets/img/map-pin-red-md.png';
 
 const Container = styled('div')`
     width: 1000px;
@@ -56,7 +56,7 @@ const area = css`
 `;
 
 const map = css`
-    ${area};    
+    ${area};
     height: 600px;
     padding-top: 50px;
 `;
@@ -75,7 +75,7 @@ const b123 = css`
     background-color: rgb(0, 139, 90);;
 `;
 
-const b126 = css`    
+const b126 = css`
     ${bus};
     color: black;
     background-color: rgb(135, 211, 223);

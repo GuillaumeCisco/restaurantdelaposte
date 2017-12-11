@@ -3,8 +3,8 @@ import styled, {css} from 'react-emotion';
 
 import {H1, side} from '../../common/components/presentation';
 
-import slate from '../../../../img/slate.jpg';
-import bg from '../../../../img/home/main3.jpg';
+import slate from '../../../../../../assets/img/slate.jpg';
+import bg from '../../../../../../assets/img/home/main3.jpg';
 
 
 const Wrapper = styled('div')`
@@ -21,7 +21,7 @@ const Shade = styled('div')`
     background-color: rgba(0, 0, 0, 0.4);
 `;
 
-const Container = styled('div')`    
+const Container = styled('div')`
     color: #fff;
     padding: 8% 15% 0;
     text-shadow: 3px 2px 3px #333;
@@ -29,14 +29,14 @@ const Container = styled('div')`
 
 const Content = styled('div')`
     font-size: 24px;
-    margin-top: 50px;    
-    text-align: center;    
+    margin-top: 50px;
+    text-align: center;
 `;
 
 const close = css`
-    ${side}; 
+    ${side};
     width: 350px;
-    margin: 1%;     
+    margin: 1%;
 `;
 
 const card = css`
@@ -46,7 +46,7 @@ const card = css`
     background-position: center center;
     background-size: cover;
     color: #fff;
-    padding: 10px;    
+    padding: 10px;
     text-align: center;
     height: 300px;
     display: flex;
@@ -61,8 +61,8 @@ const Ul = styled('ul')`
     margin: 10px 0 20px;
     padding-bottom: 20px;
     border-bottom: 1px dashed #353675;
-    & li {                
-        margin: 0 50px; 
+    & li {
+        margin: 0 50px;
         display: inline;
     }
 `;

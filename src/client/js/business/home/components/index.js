@@ -5,7 +5,7 @@ import Slider from '../../common/components/slider';
 import {Accroche, Inlinep, H1, side} from '../../common/components/presentation';
 import Background from './bg';
 
-const requireContext = require.context('../../../../img/home/', true, /^\.\/.*\.jpg$/);
+const requireContext = require.context('../../../../../../assets/img/home/', true, /^\.\/.*\.jpg$/);
 const items = requireContext.keys().map(requireContext);
 
 const Container = styled('div')`
@@ -28,7 +28,7 @@ const wrapper = css`
 const left = css`
     ${side};
     padding: 10px 2% 0;
-    width: 46%;   
+    width: 46%;
 `;
 
 const right = css`
