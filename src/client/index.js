@@ -8,11 +8,11 @@ import {hydrate as emotionHydrate} from 'emotion';
 import {Provider} from 'react-redux';
 
 import ReactHotLoader from './ReactHotLoader';
-import Root from './app/Root';
-import history from './app/history';
-import configureStore from '../../common/configureStore';
-import '../../../assets/css/index.scss';
-import DevTools from '../../common/DevTools';
+import Root from './root';
+import history from './root/history';
+import configureStore from '../common/configureStore';
+import '../../assets/css/index.scss';
+import DevTools from '../common/DevTools';
 
 /** ******************
  *  Server hydration
@@ -47,8 +47,8 @@ if (process.env.NODE_ENV !== 'production' && module.hot) {
             <DevTools/>
         </Provider>, devTools);
 
-    module.hot.accept('./app/Root', () => {
-        const app = require('./app/Root').default;
+    module.hot.accept('./root', () => {
+        const app = require('./root').default;
         renderApp(app);
     });
 }

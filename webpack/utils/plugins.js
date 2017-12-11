@@ -119,8 +119,8 @@ export default env => [
                 ({
                     ...p,
                     [c]: [
-                        path.resolve(__dirname, '../../src/client/js/index.js'),
-                        path.resolve(__dirname, `../../src/client/js/business${c === '/' ? '/home/' : c}components/index.js`),
+                        path.resolve(__dirname, '../../src/client/index.js'),
+                        path.resolve(__dirname, `../../src/client/business${c === '/' ? '/home/' : c}components/index.js`),
                     ],
                 }), {}),
             navigateFallback: PRODUCTION_BASE_NAME,
