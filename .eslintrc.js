@@ -59,4 +59,10 @@ module.exports = {
         "jsx-a11y",
         "import",
     ],
+    overrides: [
+        {
+            files: "**/*spec.js",
+            env: { "jest": true }
+        }
+    ]
 };
