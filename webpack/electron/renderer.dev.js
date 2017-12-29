@@ -6,25 +6,17 @@ import merge from 'webpack-merge';
 import {spawn, execSync} from 'child_process';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import HappyPack from 'happypack';
-
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import config from 'config';
 
 import baseConfig from './base';
 import rules from '../utils/rules';
 import definePlugin from '../utils/definePlugin';
+import dll from '../utils/dll';
+
 
 const port = process.env.PORT || 1212;
 const publicPath = `http://localhost:${port}/dist`;
-const dll = path.resolve(process.cwd(), 'dll');
-const manifest = path.resolve(dll, 'renderer.json');
-/**
- * Warn if the DLL is not built
- */
-if (!(fs.existsSync(dll) && fs.existsSync(manifest))) {
-    console.log(chalk.black.bgYellow.bold(
-        'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"',
-    ));
-    execSync('npm run build-dll');
-}
 
 export default merge.smart(baseConfig, {
     devtool: 'inline-source-map',
@@ -76,14 +68,16 @@ export default merge.smart(baseConfig, {
             }],
             threads: 4,
         }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/electron/app.ejs',
+            title: `${config.appName} dev`,
+            inject: true,
+        }),
+        dll,
         new ExtractCssChunks({
             filename: '[name].css',
             allChunks: false,
-        }),
-        new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: require(manifest),
-            sourceType: 'var',
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),

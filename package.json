@@ -1,7 +1,7 @@
 {
     "name": "restaurantdelaposte",
     "productName": "Restaurant de la Poste",
-    "author": "Guillaume Cisco",
+    "author": "Guillaume Cisco <email@need.com>",
     "version": "0.0.1",
     "license": "MIT",
     "description": "Restaurant de la Poste (Chez Robert)",
@@ -28,18 +28,17 @@
         "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
         "eslint": "./node_modules/.bin/eslint --fix src webpack",
         "dev": "cross-env IS_ELECTRON=1 START_HOT=1 npm run start-renderer-dev",
-        "start-main-dev": "cross-env IS_ELECTRON=1 HOT=1 NODE_ENV=development electron -r babel-register --require babel-polyfill ./src/electron/main.dev",
+        "start-main-dev": "cross-env IS_ELECTRON=1 HOT=1 NODE_ENV=development electron -r babel-register --require babel-polyfill ./src/electron/main",
         "start-renderer-dev": "cross-env IS_ELECTRON=1 NODE_ENV=development babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config ./webpack/electron/renderer.dev.js",
-        "start:electron": "cross-env IS_ELECTRON=1 NODE_ENV=production electron ./src/electron",
+        "start:electron": "cross-env IS_ELECTRON=1 NODE_ENV=production electron ./build/electron/index.js",
         "build:electron": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
-        "build-dll": "cross-env IS_ELECTRON=1 NODE_ENV=development node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/renderer.dev.dll.js --colors",
         "build-main": "cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/main.js --colors",
         "build-renderer": "cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/renderer.prod.js --colors",
         "package": "npm run build:electron && build --publish never",
         "package-all": "npm run build:electron && build -mwl",
         "package-linux": "npm run build:electron && build --linux",
         "package-win": "npm run build:electron && build --win --x64",
-        "postinstall": "electron-builder install-app-deps"
+        "build-electron": "build --publish never"
     },
     "pre-commit": [
         "precommit-msg",
@@ -47,21 +46,34 @@
         "eslint"
     ],
     "browserslist": "electron 1.6",
+    "main": "./build/electron/index.js",
     "build": {
-        "productName": "Restaurant de la Poste",
         "appId": "org.guillaumecisco.restaurantdelaposte",
+        "productName": "Restaurant de la Poste",
+        "directories": {
+            "buildResources": "resources",
+            "output": "release"
+        },
         "files": [
-            "dist/",
-            "node_modules/",
-            "app.html",
-            "main.prod.js",
-            "main.prod.js.map",
-            "package.json"
+            "build/electron/**/*"
         ],
+        "linux": {
+            "target": [
+                "deb",
+                "AppImage"
+            ]
+        },
         "mac": {
-            "target": "tar.gz"
+            "target": "dmg"
+        },
+        "win": {
+            "target": "nsis"
+        },
+        "nsis": {
+            "artifactName": "${productName}_${version}_win.${ext}"
         },
         "dmg": {
+            "artifactName": "${productName}_${version}_mac.${ext}",
             "contents": [
                 {
                     "x": 130,
@@ -74,39 +86,24 @@
                     "path": "/Applications"
                 }
             ]
-        },
-        "win": {
-            "target": [
-                "nsis"
-            ]
-        },
-        "linux": {
-            "target": [
-                "deb",
-                "AppImage"
-            ]
-        },
-        "directories": {
-            "buildResources": "resources",
-            "output": "release",
-            "app": "./src/electron/"
         }
     },
     "dependencies": {
         "babel-runtime": "6.26.0",
-        "emotion": "^8.0.10",
+        "emotion": "^8.0.12",
         "fastclick": "1.0.6",
         "google-map-react": "^0.25.0",
         "history": "^4.7.2",
+        "html-webpack-plugin": "2.30.1",
         "lodash": "4.17.4",
-        "react": "^16.1.1",
-        "react-dom": "^16.1.1",
-        "react-emotion": "^8.0.10",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-emotion": "^8.0.12",
         "react-helmet": "^5.2.0",
         "react-json-tree": "^0.11.0",
         "react-redux": "^5.0.6",
         "react-tap-event-plugin": "3.0.2",
-        "react-universal-component": "^2.6.0",
+        "react-universal-component": "^2.8.0",
         "recompose": "^0.26.0",
         "redux": "^3.7.2",
         "redux-actions": "2.2.1",
@@ -114,17 +111,18 @@
         "redux-first-router-link": "^1.4.2",
         "redux-reducers-injector": "0.1.1",
         "redux-saga": "0.16.0",
-        "redux-sagas-injector": "0.2.2",
+        "redux-sagas-injector": "0.2.3",
         "transition-group": "^0.0.2"
     },
     "devDependencies": {
         "atob": "^2.0.3",
-        "autodll-webpack-plugin": "^0.3.5",
-        "autoprefixer": "7.1.6",
+        "autodll-webpack-plugin": "^0.3.6",
+        "autoprefixer": "7.2.2",
         "babel-cli": "6.26.0",
         "babel-core": "6.26.0",
-        "babel-eslint": "8.0.2",
+        "babel-eslint": "8.0.3",
         "babel-loader": "7.1.2",
+        "babel-minify-webpack-plugin": "^0.2.0",
         "babel-plugin-add-module-exports": "0.2.1",
         "babel-plugin-date-fns": "0.1.0",
         "babel-plugin-lodash": "3.3.2",
@@ -135,30 +133,29 @@
         "babel-plugin-transform-react-inline-elements": "6.22.0",
         "babel-plugin-transform-react-remove-prop-types": "0.4.10",
         "babel-plugin-transform-runtime": "6.23.0",
-        "babel-plugin-universal-import": "1.3.3",
+        "babel-plugin-universal-import": "1.3.4",
         "babel-polyfill": "6.26.0",
         "babel-preset-es2015": "6.24.1",
         "babel-preset-react": "6.24.1",
         "babel-preset-stage-0": "6.24.1",
         "babel-register": "6.26.0",
         "babel-watch": "2.0.7",
-        "babili-webpack-plugin": "^0.1.2",
         "browser-sync": "2.18.13",
         "browser-sync-webpack-plugin": "1.2.0",
         "chai": "^4.1.2",
         "chalk": "^2.3.0",
-        "concurrently": "^3.5.0",
+        "concurrently": "^3.5.1",
         "config": "1.28.1",
         "cookie-parser": "^1.4.3",
         "cross-env": "^5.1.1",
         "css-loader": "0.28.7",
         "cssnano": "3.10.0",
         "devtron": "^1.4.0",
-        "electron": "^1.8.1",
-        "electron-builder": "^19.46.3",
+        "electron": "^1.7.9",
+        "electron-builder": "19.48.2",
         "electron-debug": "^1.4.0",
         "electron-devtools-installer": "^2.2.1",
-        "emotion-server": "^8.0.10",
+        "emotion-server": "^8.0.12",
         "enzyme": "3.2.0",
         "eslint": "^4.11.0",
         "eslint-config-airbnb": "16.1.0",
@@ -169,12 +166,12 @@
         "eslint-plugin-react": "7.5.1",
         "expect": "21.2.1",
         "express": "4.16.2",
-        "extract-css-chunks-webpack-plugin": "2.0.17",
+        "extract-css-chunks-webpack-plugin": "2.0.18",
         "extract-text-webpack-plugin": "^3.0.2",
         "fetch-everywhere": "1.0.5",
         "file-loader": "1.1.5",
         "form-data": "2.3.1",
-        "gzip-size": "^4.0.0",
+        "gzip-size": "^4.1.0",
         "happypack": "4.0.0",
         "istanbul": "1.1.0-alpha.1",
         "lodash-webpack-plugin": "0.11.4",
@@ -200,13 +197,14 @@
         "stats-webpack-plugin": "0.6.1",
         "sw-precache-webpack-plugin": "^0.11.4",
         "url-loader": "^0.6.2",
-        "webpack": "3.8.1",
+        "webpack": "3.10.0",
         "webpack-bundle-analyzer": "^2.9.1",
-        "webpack-dev-middleware": "1.12.0",
-        "webpack-dev-server": "^2.9.4",
-        "webpack-flush-chunks": "1.2.1",
-        "webpack-hot-middleware": "2.20.0",
+        "webpack-dev-middleware": "1.12.2",
+        "webpack-dev-server": "^2.9.7",
+        "webpack-flush-chunks": "1.2.2",
+        "webpack-hot-middleware": "2.21.0",
         "webpack-hot-server-middleware": "0.3.0",
+        "webpack-sources": "1.0.1",
         "webpack-merge": "^4.1.1",
         "why-did-you-update": "^0.1.0",
         "write-file-webpack-plugin": "4.2.0"

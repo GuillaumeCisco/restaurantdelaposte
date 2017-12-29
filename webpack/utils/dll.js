@@ -1,17 +1,22 @@
 import path from 'path';
 import webpack from 'webpack';
+import BabelMinifyPlugin from 'babel-minify-webpack-plugin';
 import AutoDllPlugin from 'autodll-webpack-plugin';
 
 const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
 
 export default new AutoDllPlugin({
+    inject: true,
     context: path.join(__dirname, '../..'),
     filename: '[name]-dll.js',
     plugins: !DEVELOPMENT ? [
-        new webpack.optimize.UglifyJsPlugin(),
+        new BabelMinifyPlugin({}, {
+            comments: false,
+            sourceMap: true,
+        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
-        })
+        }),
     ] : [],
     debug: true,
     entry: {
@@ -19,6 +24,7 @@ export default new AutoDllPlugin({
             'react',
             'react-dom',
             'react-emotion',
+            'emotion',
             'react-redux',
             'react-tap-event-plugin',
         ],
@@ -32,7 +38,6 @@ export default new AutoDllPlugin({
             'redux-sagas-injector'
         ],
         commonVendors: [
-            'emotion',
             'fastclick',
             'google-map-react',
             'history',
