@@ -61,7 +61,7 @@ export default ({clientStats}) => async (req, res, next) => {
           <script>window.REDUX_STATE = ${stateJson}</script>
           <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
           <div id="root">${html}</div>
-          {process.env.NODE_ENV === 'development' ? <div id="devTools"></div> : ''}
+          ${process.env.NODE_ENV === 'development' ? '<div id="devTools"></div>' : ''}
           ${cssHash}
           ${dll}
           ${js}
