@@ -15,7 +15,7 @@
         "npm": ">=5.3.0"
     },
     "scripts": {
-        "start": "npm run clean && cross-env NODE_ENV=development babel-watch webpack/ssr/index.js",
+        "start": "npm run clean && cross-env NODE_ENV=development babel-watch webpack/ssr/index.js --inspect",
         "start:prod": "npm run build:main && npm run serve",
         "build:main": "npm run build:client && npm run build:server && npm run build:node",
         "build:client": "rimraf build/ssr/client && cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/ssr/client.js",
@@ -43,7 +43,7 @@
         "setupFiles": [
             "<rootDir>/test/shimSetup.js"
         ],
-        "setupTestFrameworkScriptFile" : "<rootDir>/test/setup.js",
+        "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
         "snapshotSerializers": [
             "enzyme-to-json/serializer"
         ],

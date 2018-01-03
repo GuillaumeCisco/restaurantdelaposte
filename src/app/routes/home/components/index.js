@@ -45,6 +45,8 @@ class Home extends React.Component {
         if (!this.state.imgLoaded) {
             this.setState({imgLoaded: true});
         }
+        console.log('hello');
+        console.log('patate');
     };
 
     render() {
