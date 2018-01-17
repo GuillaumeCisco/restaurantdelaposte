@@ -60,13 +60,18 @@ export default env => [
         test: /\.s?css$/,
         exclude: /node_modules/,
         use: ExtractCssChunks.extract({
-            use: {
-                loader: 'css-loader',
-                options: {
-                    importLoaders: true,
-                    sourceMap: true,
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: true,
+                        sourceMap: true,
+                    },
                 },
-            },
+                {
+                    loader: 'sass-loader',
+                },
+            ],
         }),
     }]),
 ];
