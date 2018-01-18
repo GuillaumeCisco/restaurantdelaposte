@@ -5,14 +5,14 @@ import {pick} from 'lodash';
 import {createInjectSagasStore, sagaMiddleware, reloadSaga} from 'redux-sagas-injector';
 import {combineReducersRecurse} from 'redux-reducers-injector';
 
-import options from '../options';
-import rootSaga from '../sagas';
-import rootReducer from '../reducer';
+import options from './options';
+import rootSaga from '../../app/sagas';
+import rootReducer from '../../app/reducer';
 import DevTools from '../DevTools';
-import routesMap from '../routesMap';
+import routes from '../../app/routesMap';
 
 const configureStore = (history, initialState) => {
-    const {reducer, middleware, enhancer, thunk, initialDispatch} = connectRoutes(history, routesMap, {
+    const {reducer, middleware, enhancer, thunk, initialDispatch} = connectRoutes(history, routes, {
         initialDispatch: false,
         ...options,
     }); // yes, 5 redux aspects
@@ -31,14 +31,14 @@ const configureStore = (history, initialState) => {
 
     // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
     if (module.hot) {
-        module.hot.accept('../reducer', () => {
-            const rootReducer = require('../reducer').default;
+        module.hot.accept('../../app/reducer', () => {
+            const rootReducer = require('../../app/reducer').default;
             const replacedReducers = {...store.injectedReducers, ...rootReducer, location: reducer};
             store.replaceReducer(combineReducersRecurse(replacedReducers));
         });
 
-        module.hot.accept('../sagas', () => {
-            reloadSaga('rootSaga', require('../sagas').default);
+        module.hot.accept('../../app/sagas', () => {
+            reloadSaga('rootSaga', require('../../app/sagas').default);
         });
     }
 

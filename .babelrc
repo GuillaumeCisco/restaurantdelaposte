@@ -1,6 +1,7 @@
 {
     "presets": [
         "es2015",
+        "es2017",
         "react",
         "stage-0"
     ],
@@ -8,5 +9,12 @@
         "transform-runtime",
         "transform-class-properties",
         "transform-es2015-classes"
-    ]
+    ],
+    "env": {
+        "test": {
+            "plugins": [
+                ["emotion", { "inline": true }]
+            ]
+        }
+    }
 }
