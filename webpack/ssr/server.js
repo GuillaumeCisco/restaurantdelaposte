@@ -32,7 +32,9 @@ const externals = fs
 export default {
     name: 'server',
     target: 'node',
-    devtool: DEBUG ? 'source-map' : (DEVELOPMENT ? 'source-map' : '#hidden-source-map'),
+    devtool: DEBUG ?
+        'source-map' :
+        (DEVELOPMENT ? 'cheap-module-source-map' : '#hidden-source-map'),
     entry: [
         'babel-polyfill',
         'fetch-everywhere',
