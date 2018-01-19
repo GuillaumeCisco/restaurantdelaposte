@@ -1,7 +1,4 @@
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-
-const PRODUCTION = (['production'].includes(process.env.NODE_ENV));
 
 export default env => [
     {
