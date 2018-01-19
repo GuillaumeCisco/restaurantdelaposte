@@ -1,0 +1,71 @@
+{
+    "name": "electron-package",
+    "version": "0.0.1",
+    "dependencies": {
+        "html-webpack-plugin": "2.30.1"
+    },
+    "devDependencies": {
+        "devtron": "1.4.0",
+        "electron": "1.7.10",
+        "electron-builder": "19.49.2",
+        "electron-debug": "1.4.0",
+        "electron-devtools-installer": "2.2.3"
+    },
+    "browserslist": "electron 1.6",
+    "main": "../../build/electron/index.js",
+    "build": {
+        "appId": "org.guillaumecisco.website",
+        "productName": "Guillaume Cisco's website",
+        "directories": {
+            "buildResources": "resources",
+            "output": "release"
+        },
+        "files": [
+            "../../build/electron/**/*"
+        ],
+        "linux": {
+            "target": [
+                "deb",
+                "AppImage"
+            ]
+        },
+        "mac": {
+            "target": "dmg"
+        },
+        "win": {
+            "target": "nsis"
+        },
+        "nsis": {
+            "artifactName": "${productName}_${version}_win.${ext}"
+        },
+        "dmg": {
+            "artifactName": "${productName}_${version}_mac.${ext}",
+            "contents": [
+                {
+                    "x": 130,
+                    "y": 220
+                },
+                {
+                    "x": 410,
+                    "y": 220,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "dev": "cross-env IS_ELECTRON=1 START_HOT=1 npm run start-renderer-dev",
+        "start-main-dev": "cd ../../ && cross-env IS_ELECTRON=1 HOT=1 NODE_ENV=development electron -r babel-register --require babel-polyfill ./src/electron/main",
+        "start-renderer-dev": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=development babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config ./webpack/electron/renderer.dev.js",
+        "start:electron": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=production electron ./build/electron/index.js",
+        "build:electron": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
+        "build-main": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/main.js --colors && cd -",
+        "build-renderer": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/renderer.prod.js --colors && cd -",
+        "package": "npm run build:electron && build --publish never",
+        "package-all": "npm run build:electron && build -mwl",
+        "package-linux": "npm run build:electron && build --linux",
+        "package-win": "npm run build:electron && build --win --x64",
+        "build-electron": "build --publish never"
+    }
+}

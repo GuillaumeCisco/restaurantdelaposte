@@ -7,4 +7,5 @@ const name = 'restaurantdelaposte';
 
 console.log(`Deploying ${registry}/${name}:${timestamp}`);
 
-shell.exec(`docker build -t ${registry}/${name}:${timestamp} -t ${registry}/${name}:latest . && docker push ${registry}/${name}:latest`);
+shell.exec(`docker build -t ${registry}/${name}:${timestamp} -t ${registry}/${name}:latest .`);
+shell.exec(`docker push ${registry}/${name}:latest`);
