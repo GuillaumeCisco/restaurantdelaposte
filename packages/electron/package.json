@@ -62,10 +62,10 @@
         "build:electron": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
         "build-main": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/main.js --colors && cd -",
         "build-renderer": "cd ../../ && cross-env IS_ELECTRON=1 NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --progress --config webpack/electron/renderer.prod.js --colors && cd -",
-        "package": "npm run build:electron && build --publish never",
-        "package-all": "npm run build:electron && build -mwl",
-        "package-linux": "npm run build:electron && build --linux",
-        "package-win": "npm run build:electron && build --win --x64",
-        "build-electron": "build --publish never"
+        "package": "cd ../../ && npm run build:electron && build --publish never && cd -",
+        "package-all": "cd ../../ && npm run build:electron && build -mwl && cd -",
+        "package-linux": "cd ../../ && npm run build:electron && build --linux && cd -",
+        "package-win": "cd ../../ && npm run build:electron && build --win --x64 && cd -",
+        "build-electron": "cd ../../ && build --publish never && cd -"
     }
 }
