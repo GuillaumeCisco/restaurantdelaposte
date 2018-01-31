@@ -2,6 +2,7 @@ import compression from 'compression';
 import config from 'config';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import helmet from 'helmet';
 import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -29,6 +30,7 @@ const outputPath = path.resolve(__dirname, '../../build/ssr/client');
 
 
 const app = express();
+app.use(helmet());
 app.use(cookieParser());
 app.use(compression());
 
