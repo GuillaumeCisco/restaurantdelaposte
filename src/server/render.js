@@ -60,8 +60,6 @@ export default ({clientStats}) => async (req, res, next) => {
     const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
     const dll = flushDll(clientStats);
 
-    console.log(dll, `${js}`);
-
     res.set('Content-Type', 'text/html');
     // flush the head with css & js resource tags first so the download starts immediately
     const early = earlyChunk(styles, stateJson);
