@@ -21,7 +21,7 @@ const flushDll = clientStats => {
     return clientStats.assets.reduce((p, c) => [
         ...p,
         ...(c.name.endsWith('dll.js') ? [`<script type="text/javascript" src="/${c.name}" defer></script>`] : [])
-    ], []);
+    ], []).join('\n');
 };
 
 const earlyChunk = (styles, stateJson) => `
@@ -60,6 +60,7 @@ export default ({clientStats}) => async (req, res, next) => {
     const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
     const dll = flushDll(clientStats);
 
+    console.log(dll, `${js}`);
 
     res.set('Content-Type', 'text/html');
     // flush the head with css & js resource tags first so the download starts immediately
