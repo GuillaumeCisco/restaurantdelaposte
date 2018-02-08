@@ -1,7 +1,7 @@
 *
 !build
-!webpack/client.js
-!webpack/server.js
+!webpack/ssr/client.js
+!webpack/ssr/server.js
 !webpack/utils
 !Dockerfile
 !packages/ssr/package.json

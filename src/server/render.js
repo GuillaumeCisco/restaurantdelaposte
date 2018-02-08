@@ -4,7 +4,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {renderToNodeStream} from 'react-dom/server';
 import {renderStylesToNodeStream} from 'emotion-server';
-import {flushChunkNames} from 'react-universal-component/server';
+import {clearChunks, flushChunkNames} from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
 import App from '../app';
@@ -51,6 +51,8 @@ const earlyChunk = (styles, stateJson) => `
   `;
 
 export default ({clientStats}) => async (req, res, next) => {
+    clearChunks();
+
     const store = await configureStore(req, res);
     if (!store) return; // no store means redirect was already served
 
