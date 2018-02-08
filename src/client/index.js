@@ -4,7 +4,6 @@ import React from 'react';
 import {hydrate, render} from 'react-dom';
 import FastClick from 'fastclick';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import {hydrate as emotionHydrate} from 'emotion';
 import {Provider} from 'react-redux';
 
 import ReactHotLoader from './ReactHotLoader';
@@ -13,13 +12,6 @@ import history from './root/history';
 import configureStore from '../common/configureStore';
 import '../../assets/css/index.scss';
 import DevTools from '../common/DevTools';
-
-/** ******************
- *  Server hydration
- ******************* */
-if (window.EMOTION_IDS) {
-    emotionHydrate(window.EMOTION_IDS);
-}
 
 const {store} = configureStore(history, window.REDUX_STATE);
 

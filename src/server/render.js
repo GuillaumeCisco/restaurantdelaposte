@@ -1,18 +1,15 @@
 /* global APP_NAME META_DESCRIPTION META_KEYWORDS */
 
 import React from 'react';
-import ReactDOM from 'react-dom/server';
-import {extractCritical} from 'emotion-server';
 import {Provider} from 'react-redux';
+import {renderToNodeStream} from 'react-dom/server';
+import {renderStylesToNodeStream} from 'emotion-server';
 import {flushChunkNames} from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
-import configureStore from './configureStore';
-
 import App from '../app';
+import configureStore from './configureStore';
 import serviceWorker from './serviceWorker';
-
-import Dll from '../../webpack/utils/dll';
 
 const createApp = (App, store) => (
     <Provider store={store}>
@@ -20,31 +17,15 @@ const createApp = (App, store) => (
     </Provider>
 );
 
+const flushDll = clientStats => {
+    return clientStats.assets.reduce((p, c) => [
+        ...p,
+        ...(c.name.endsWith('dll.js') ? [`<script type="text/javascript" src="/${c.name}" defer></script>`] : []),
+    ], []).join('\n');
+};
 
-// TODO: handle [hash]
-const flushDll = (clientStats) => Object.keys(Dll._originalSettings.entry).map(o =>
-    `<script type="text/javascript" src="${clientStats.publicPath}${Dll._originalSettings.filename.replace(/\[name\]/, o)}" defer></script>`,
-).join('\n');
-
-export default ({clientStats}) => async (req, res, next) => {
-
-    const store = await configureStore(req, res);
-    if (!store) return; // no store means redirect was already served
-
-    const app = createApp(App, store);
-    const {html, ids, css} = extractCritical(ReactDOM.renderToString(app));
-
-    // Grab the CSS from our sheetsRegistry.
-    const stateJson = JSON.stringify(store.getState());
-    const chunkNames = flushChunkNames();
-    const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
-    const dll = flushDll(clientStats);
-
-    console.log('REQUESTED PATH:', req.path);
-    console.log('CHUNK NAMES', chunkNames);
-
-    return res.send(
-        `<!doctype html>
+const earlyChunk = (styles, stateJson) => `
+    <!doctype html>
       <html>
         <head>
           <meta charset="utf-8">
@@ -55,19 +36,52 @@ export default ({clientStats}) => async (req, res, next) => {
           <meta name="description" content="${META_DESCRIPTION}"/>
           <meta name="keywords" content="${META_KEYWORDS}" />
           ${styles}
-          <style type="text/css">${css}</style>
-          <link rel="preload" href="/font/ShadedLarch_PERSONAL_USE.ttf" as="font" crossorigin>
         </head>
-        <body>
+      <body>
           <script>window.REDUX_STATE = ${stateJson}</script>
-          <script>${`window.EMOTION_IDS = new Array("${ids}")`}</script>
-          <div id="root">${html}</div>
+          <div id="root">`,
+    lateChunk = (cssHash, js, dll) => `</div>
           ${process.env.NODE_ENV === 'development' ? '<div id="devTools"></div>' : ''}
           ${cssHash}
           ${dll}
           ${js}
           ${serviceWorker}
         </body>
-      </html>`,
-    );
+    </html>
+  `;
+
+export default ({clientStats}) => async (req, res, next) => {
+    const store = await configureStore(req, res);
+    if (!store) return; // no store means redirect was already served
+
+    const app = createApp(App, store);
+    const stream = renderToNodeStream(app).pipe(renderStylesToNodeStream());
+
+    // Grab the CSS from our sheetsRegistry.
+    const stateJson = JSON.stringify(store.getState());
+
+    /* In this project, we do not use css module in chunks, so we know our only main chunk, no need to call flushChunks */
+    //const {styles} = flushChunks(clientStats);
+    const styles = '<link rel=\'stylesheet\' href=\'/main.css\' />';
+
+    res.set('Content-Type', 'text/html');
+    // flush the head with css & js resource tags first so the download starts immediately
+    const early = earlyChunk(styles, stateJson);
+    res.write(early);
+    res.flush();
+
+    stream.pipe(res, {end: false});
+    stream.on('end', () => {
+
+        const chunkNames = flushChunkNames();
+        const {js, cssHash} = flushChunks(clientStats, {chunkNames});
+        const dll = flushDll(clientStats);
+
+        console.log('REQUESTED PATH:', req.path);
+        console.log('CHUNK NAMES', chunkNames);
+
+        const late = lateChunk(cssHash, js, dll);
+        res.write(late);
+        res.end();
+    });
 };

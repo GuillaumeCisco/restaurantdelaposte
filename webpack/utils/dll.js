@@ -8,7 +8,7 @@ const DEVELOPMENT = (['development', 'staging'].includes(process.env.NODE_ENV));
 export default new AutoDllPlugin({
     inject: true,
     context: path.join(__dirname, '../..'),
-    filename: '[name]-dll.js',
+    filename: `[name]${DEVELOPMENT ? '' : '_[hash]'}.dll.js`,
     plugins: !DEVELOPMENT ? [
         new BabelMinifyPlugin({}, {
             comments: false,
