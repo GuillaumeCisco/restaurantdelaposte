@@ -29,7 +29,7 @@ yarn package-all
 
 For building the production website and deploy it, run:
 ```
-yarn build-main
+yarn build:main
 yarn deploy
 ```
 
